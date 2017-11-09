@@ -17,5 +17,10 @@ def main():
     B.pack()    
     top.mainloop()
     
+    # create an image array based on the file and input number of rows and col
+    # find min and max in the image array
+    # numpy array, matplotlib imshow or glumpy
+    # change the color scale
+    
 if __name__ == '__main__':
     main()
