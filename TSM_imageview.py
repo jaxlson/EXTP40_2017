@@ -58,5 +58,21 @@ class TSM_ImageView:
         print("Drawing")
 
 root = Tk()
+
+menu = Menu(root)
+root.config(menu=menu)
+
+subMenu = Menu()
+
+menu.add_cascade(label="File", menu=subMenu)
+subMenu.add_command(label="Open image file")
+subMenu.add_command(label="Open file list")
+subMenu.add_separator()
+subMenu.add_command(label="Exit", command = root.quit())
+
+editMenu = Menu(menu)
+menu.add_cascade(label ="Edit", menu = editMenu)
+editMenu.add_command(label="Redo")
+
 my_gui = TSM_ImageView(root)
 root.mainloop()
