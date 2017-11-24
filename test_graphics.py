@@ -3,16 +3,16 @@ import random
 
 master = Tk()
 
-w = Canvas(master, width=300, height=300)
+w = Canvas(master, width=1000, height=1000)
 w.pack()
 
-rows = 10
-cols = 10
+rows = 100
+cols = 100
 
-px = [random.randint(0, 255) for n in range(100)]
+px = [random.randint(0, 255) for n in range(10000)]
 x = 0
 y = 0
-side = 30
+side = 10
 
 def color(n): #om n ar max 255. Ger # foljt av hex
     #print 'n:', n
@@ -25,7 +25,7 @@ def color(n): #om n ar max 255. Ger # foljt av hex
 
 for r in range(rows):
     for c in range(cols):
-        w.create_rectangle(x, y, x + side, y + side, fill = color(px[r*rows + c]))
+        w.create_rectangle(x, y, x + side, y + side, fill = color(px[r*rows + c]), outline = "")
         x = x + side
     y = y + side
     x = 0
