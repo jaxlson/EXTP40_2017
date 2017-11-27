@@ -1,0 +1,20 @@
+Att göra (i ungefär den här ordningen)
+
+*Läsa in fil via dialogruta ("file chooser")
+**Öppna dialogruta via menyknapp
+**Välja fil
+*Läsa in antal rader och kolumner från textrutor (användarinput)
+*Rita upp bilden när man trycker på "Draw"-knapp
+
+*Ändra färgschema (välj från drop-down)
+**Bilden ritas om automatiskt
+
+*Visa gränsvärden
+*Ändra gränsvärden
+**Bilden ritas om automatiskt
+
+*Visa histogram
+** Ändras automatiskt när gränsvärden ändras
+
+*File list?
+*Print window?
