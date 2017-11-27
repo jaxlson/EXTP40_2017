@@ -1,6 +1,16 @@
 from Tkinter import *
+import Tkinter
+import tkFileDialog
 import random
 from compiler.pycodegen import EXCEPT
+
+
+def file_dialog():
+    f = tkFileDialog.askopenfilename()
+
+    if f is not None:
+        return f
+
 
 def read_integers(filename):
     with open(filename) as img:
@@ -18,12 +28,12 @@ rows = 13
 cols = 11
 
 #px = [random.randint(0, 255) for n in range(10000)]
-px = read_integers('test2.txt')
+#px = read_integers("test2.txt")
+px = read_integers(file_dialog())
 print 'length: ', len(px), 'px: ', px
 x = 0
 y = 0
 side = 10
-
 
 def color(n): #om n ar max 255. Ger # foljt av hex
     #print 'n:', n
