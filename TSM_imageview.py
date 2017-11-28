@@ -15,14 +15,13 @@ from FrameScale import FrameScale
 class TSM_ImageView:
     # Divide in to MVC model, or just separate classes 
     def __init__(self, master):
-        self.master = master
-        
+ 
         master.title("TSM Image View")
         
+        # Create frames for right and left "columns"
         self.frame_left = Frame(master, width=200)
         self.frame_right = Frame(master)
         
-        self.combo(self.frame_right)
         # Menu
         MenuBar(master)
         
@@ -30,27 +29,25 @@ class TSM_ImageView:
         self.frame_format = Frame(self.frame_left)
         frameF = FrameFormat(master, self.frame_format)
         # get entry value frameF.col_entry.get() 
+        
+        # Create format frame with widgets
         self.frame_scale = Frame(self.frame_left)
         frameS = FrameScale(master, self.frame_scale)
         
         # Load an image file
         a = np.fromfile('wa_cl00011.img', dtype=np.uint8)
-        print(type(a), np.size(a))
+
         # Reshape to the right rows and cols
         a = a.reshape(200,200)
 
         # Display the image
-        # cmaps: jet, parula, hsv, hot, cool, spring, summer, autumn, winter
-        #        grey, bone, copper, pink, colorcube,  
         im = plt.imshow(a, cmap= 'brg')
         plt.colorbar(im, orientation = 'vertical')
         f = plt.gcf()
-
         self.frame_map = Frame(self.frame_right) 
         canvas_map = FigureCanvasTkAgg(f, self.frame_map)
         canvas_map.show()
         canvas_map.get_tk_widget().pack()
-
         toolbar = NavigationToolbar2TkAgg(canvas_map, self.frame_map)
         toolbar.update()
         canvas_map._tkcanvas.pack(fill=BOTH, expand=TRUE)
@@ -62,10 +59,9 @@ class TSM_ImageView:
         canvas_hist = FigureCanvasTkAgg(raster_hist, self.frame_hist)
         canvas_hist.show()
         canvas_hist.get_tk_widget().pack(fill=BOTH, expand=YES)
-
-        # toolbar = NavigationToolbar2TkAgg(canvas_hist, self.frame)
-        # toolbar.update()
         canvas_hist._tkcanvas.pack()
+        
+        self.combo(self.frame_right)
         
         # Layout - widget positioning
         self.frame_left.pack(side=LEFT, fill=BOTH, expand=YES, padx=5, pady=5)
@@ -77,6 +73,8 @@ class TSM_ImageView:
         self.frame_map.pack()
         
     def combo(self, frame):
+        # cmaps: jet, parula, hsv, hot, cool, spring, summer, autumn, winter
+        #        grey, bone, copper, pink, colorcube,  
         self.box_value = StringVar()
         self.box = ttk.Combobox(frame, textvariable=self.box_value, 
                                 state='readonly')
