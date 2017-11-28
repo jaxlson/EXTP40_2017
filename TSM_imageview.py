@@ -1,43 +1,40 @@
 from Tkinter import *
-from PIL import ImageTk, Image
 import matplotlib
 import ttk
-from menu_commands import *
 
 matplotlib.use('TkAgg')
-
 import numpy as np
 import pylab as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 from matplotlib.backend_bases import key_press_handler
+from MenuBar import MenuBar
+from FrameFormat import FrameFormat
+from Hist import Hist
+from FrameScale import FrameScale
 
 
 class TSM_ImageView:
     # Divide in to MVC model, or just separate classes 
     def __init__(self, master):
-        self.master = master
-        self.combo(master)
+ 
         master.title("TSM Image View")
-        # Create frames for eg. Format area and Image scaling
-        # Use pack in frames and grid to place frames and objects
-        # Widgets
-        self.frame_left = Frame(master)
-        self.main_label =  Label(self.frame_left, text = "TIMESAT image viewer")
-        self.type_label = Label(self.frame_left, text = "Image file type")
-        self.order_label = Label(self.frame_left, text = "Byte order")
-        self.row_label = Label(self.frame_left, text = "Nbr of rows")
-        self.col_label = Label(self.frame_left, text = "Nbr of columns")
-
-        vcmd = master.register(self.validate) # we have to wrap the command
-        self.row_entry = Entry(self.frame_left, validate="key", validatecommand=(vcmd, '%P'))
-        self.col_entry = Entry(self.frame_left, validate="key", validatecommand=(vcmd, '%P'))
-
-        self.draw_button = Button(self.frame_left, text="Draw", command=lambda: self.draw())
-
-        #path = "py.png"
-        #self.img = ImageTk.PhotoImage(Image.open(path))
-        #self.img_frame = Label(master, image = self.img)
-
+        
+        # Create frames for right and left "columns"
+        self.frame_left = Frame(master, width=200)
+        self.frame_right = Frame(master)
+        
+        # Menu
+        MenuBar(master)
+        
+        # Create format frame with widgets
+        self.frame_format = Frame(self.frame_left)
+        frameF = FrameFormat(master, self.frame_format)
+        # get entry value frameF.col_entry.get() 
+        
+        # Create format frame with widgets
+        self.frame_scale = Frame(self.frame_left)
+        frameS = FrameScale(master, self.frame_scale)
+        
         # Load an image file
         a = np.fromfile('wa_cl00011.img', dtype=np.uint8)
 
@@ -45,83 +42,55 @@ class TSM_ImageView:
         a = a.reshape(200,200)
 
         # Display the image
-        # cmaps: jet, parula, hsv, hot, cool, spring, summer, autumn, winter
-        #        grey, bone, copper, pink, colorcube,  
         im = plt.imshow(a, cmap= 'brg')
         plt.colorbar(im, orientation = 'vertical')
         f = plt.gcf()
-
-        self.frame = Frame(master) 
-        canvas = FigureCanvasTkAgg(f, self.frame)
-        canvas.show()
-        canvas.get_tk_widget().pack()
-
-        toolbar = NavigationToolbar2TkAgg(canvas, self.frame)
+        self.frame_map = Frame(self.frame_right) 
+        canvas_map = FigureCanvasTkAgg(f, self.frame_map)
+        canvas_map.show()
+        canvas_map.get_tk_widget().pack()
+        toolbar = NavigationToolbar2TkAgg(canvas_map, self.frame_map)
         toolbar.update()
-        canvas._tkcanvas.pack()
-
+        canvas_map._tkcanvas.pack(fill=BOTH, expand=TRUE)
+        
+        # Display Histogram
+        hist = Hist(a)
+        raster_hist = hist.figure()
+        self.frame_hist = Frame(self.frame_left) 
+        canvas_hist = FigureCanvasTkAgg(raster_hist, self.frame_hist)
+        canvas_hist.show()
+        canvas_hist.get_tk_widget().pack(fill=BOTH, expand=YES)
+        canvas_hist._tkcanvas.pack()
+        
+        self.combo(self.frame_right)
+        
         # Layout - widget positioning
-        self.frame_left.grid(row=0, column=0, sticky=N)
-        self.main_label.grid(row=0, column=0, sticky=W)
-        self.type_label.grid(row=1, column=0, sticky=W)
-        self.order_label.grid(row=2, column=0, sticky=W)
-
-        self.row_label.grid(row=3, column=0, sticky=W)
-        self.row_entry.grid(row=3, column=1, sticky=E)
-        self.col_label.grid(row=4, column=0, sticky=W)
-        self.col_entry.grid(row=4, column=1, sticky=E)
-
-        self.draw_button.grid(row=4, column=2)
-
-        #self.img_frame.grid(row=0, column=2)
-        self.frame.grid(row=0, column =2)
+        self.frame_left.pack(side=LEFT, fill=BOTH, expand=YES, padx=5, pady=5)
+        self.frame_right.pack(side=LEFT, fill=BOTH, expand=YES, padx=5, pady=5)
         
+        self.frame_format.pack()
+        self.frame_hist.pack()
+        self.frame_scale.pack()
+        self.frame_map.pack()
         
-    def validate(self, new_text):
-        if not new_text: # the field is being cleared
-            #return that the entry is empty
-            return True
-
-        try:
-            self.entered_number = int(new_text)
-            return True
-        except ValueError:
-            return False
-
-    def draw(self):
-        # Run when draw button is pressed
-        # Update a matrix with the loaded file
-        print("Drawing")
-
-    def combo(self, master):
+    def combo(self, frame):
+        # cmaps: jet, parula, hsv, hot, cool, spring, summer, autumn, winter
+        #        grey, bone, copper, pink, colorcube,  
         self.box_value = StringVar()
-        self.box = ttk.Combobox(self.master, textvariable=self.box_value, 
+        self.box = ttk.Combobox(frame, textvariable=self.box_value, 
                                 state='readonly')
         self.box['values'] = ('A', 'B', 'C')
         self.box.current(0)
-        self.box.grid(column=2, row=1)
+        self.box.pack()
+    
+    def on_closing(self):
+            # messegebox asking for exits
+            plt.close('all')
+            root.destroy()  
 
-
-
-root = Tk()
-
-menu = Menu(root)
-root.config(menu=menu)
-
-subMenu = Menu()
-
-menu.add_cascade(label="File", menu=subMenu)
-subMenu.add_command(label="Open image file", command=open_file)
-subMenu.add_command(label="Open file list", command=file_list)
-subMenu.add_separator()
-subMenu.add_command(label="Printing Window", command=printing_window)
-subMenu.add_separator()
-subMenu.add_command(label="Exit", command = root.quit())
-
-
-editMenu = Menu(menu)
-menu.add_cascade(label ="Help", menu = editMenu)
-editMenu.add_command(label="About")
-
+root = Tk() 
 my_gui = TSM_ImageView(root)
+root.protocol("WM_DELETE_WINDOW", my_gui.on_closing)
 root.mainloop()
+
+
