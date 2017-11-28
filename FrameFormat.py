@@ -3,7 +3,7 @@ Created on 28 nov. 2017
 
 @author: Josefine
 '''
-from Tkinter import Label, Entry, Button, Grid
+from Tkinter import Label, Entry, Button
 
 class FrameFormat(object):
 
@@ -45,4 +45,5 @@ class FrameFormat(object):
     def draw(self):
         # Run when draw button is pressed
         # Update a matrix with the loaded file
-        print("Drawing")   
+        print('Drawing','Row entry', self.row_entry.get(),
+              'Column entry', self.col_entry.get())   
