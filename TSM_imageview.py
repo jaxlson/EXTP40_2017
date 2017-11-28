@@ -112,9 +112,9 @@ subMenu = Menu()
 
 menu.add_cascade(label="File", menu=subMenu)
 subMenu.add_command(label="Open image file", command=open_file)
-subMenu.add_command(label="Open file list")
+subMenu.add_command(label="Open file list", command=file_list)
 subMenu.add_separator()
-subMenu.add_command(label="Printing Window")
+subMenu.add_command(label="Printing Window", command=printing_window)
 subMenu.add_separator()
 subMenu.add_command(label="Exit", command = root.quit())
 
