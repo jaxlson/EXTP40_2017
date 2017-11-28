@@ -1,10 +1,7 @@
 from Tkinter import *
-from PIL import ImageTk, Image
 import matplotlib
 import ttk
-
 matplotlib.use('TkAgg')
-
 import numpy as np
 import pylab as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
@@ -17,8 +14,23 @@ class TSM_ImageView:
         self.master = master
         self.combo(master)
         master.title("TSM Image View")
-        # Create frames for eg. Format area and Image scaling
-        # Use pack in frames and grid to place frames and objects
+        
+        # Menu
+        menu = Menu(root)
+        master.config(menu=menu)        
+        subMenu = Menu()        
+        menu.add_cascade(label="File", menu=subMenu)
+        subMenu.add_command(label="Open image file")
+        subMenu.add_command(label="Open file list")
+        subMenu.add_separator()
+        subMenu.add_command(label="Printing Window")
+        subMenu.add_separator()
+        subMenu.add_command(label="Exit", command = root.quit())
+        
+        editMenu = Menu(menu)
+        menu.add_cascade(label ="Help", menu = editMenu)
+        editMenu.add_command(label="About")
+        
         # Widgets
         self.frame_left = Frame(master)
         self.main_label =  Label(self.frame_left, text = "TIMESAT image viewer")
@@ -99,26 +111,15 @@ class TSM_ImageView:
         self.box['values'] = ('A', 'B', 'C')
         self.box.current(0)
         self.box.grid(column=2, row=1)
-        
+    
+    def on_closing(self):
+            # messegebox asking for exits
+            plt.close()
+            root.destroy()  
 
-root = Tk()
-
-menu = Menu(root)
-root.config(menu=menu)
-
-subMenu = Menu()
-
-menu.add_cascade(label="File", menu=subMenu)
-subMenu.add_command(label="Open image file")
-subMenu.add_command(label="Open file list")
-subMenu.add_separator()
-subMenu.add_command(label="Printing Window")
-subMenu.add_separator()
-subMenu.add_command(label="Exit", command = root.quit())
-
-editMenu = Menu(menu)
-menu.add_cascade(label ="Help", menu = editMenu)
-editMenu.add_command(label="About")
-
+root = Tk() 
 my_gui = TSM_ImageView(root)
+root.protocol("WM_DELETE_WINDOW", my_gui.on_closing)
 root.mainloop()
+
+
