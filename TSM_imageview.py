@@ -7,6 +7,7 @@ import pylab as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 from matplotlib.backend_bases import key_press_handler
 from MenuBar import MenuBar
+from FrameFormat import FrameFormat
 
 
 class TSM_ImageView:
@@ -18,23 +19,10 @@ class TSM_ImageView:
         
         # Menu
         MenuBar(master)
-        # Widgets
-        self.frame_left = Frame(master)
-        self.main_label =  Label(self.frame_left, text = "TIMESAT image viewer")
-        self.type_label = Label(self.frame_left, text = "Image file type")
-        self.order_label = Label(self.frame_left, text = "Byte order")
-        self.row_label = Label(self.frame_left, text = "Nbr of rows")
-        self.col_label = Label(self.frame_left, text = "Nbr of columns")
-
-        vcmd = master.register(self.validate) # we have to wrap the command
-        self.row_entry = Entry(self.frame_left, validate="key", validatecommand=(vcmd, '%P'))
-        self.col_entry = Entry(self.frame_left, validate="key", validatecommand=(vcmd, '%P'))
-
-        self.draw_button = Button(self.frame_left, text="Draw", command=lambda: self.draw())
-
-        #path = "py.png"
-        #self.img = ImageTk.PhotoImage(Image.open(path))
-        #self.img_frame = Label(master, image = self.img)
+        
+        # Create format frame with widgets
+        self.frame_format = Frame(master)
+        FrameFormat(master, self.frame_format)
 
         # Load an image file
         a = np.fromfile('wa_cl00011.img', dtype=np.uint8)
@@ -59,37 +47,11 @@ class TSM_ImageView:
         canvas._tkcanvas.pack()
 
         # Layout - widget positioning
-        self.frame_left.grid(row=0, column=0, sticky=N)
-        self.main_label.grid(row=0, column=0, sticky=W)
-        self.type_label.grid(row=1, column=0, sticky=W)
-        self.order_label.grid(row=2, column=0, sticky=W)
-
-        self.row_label.grid(row=3, column=0, sticky=W)
-        self.row_entry.grid(row=3, column=1, sticky=E)
-        self.col_label.grid(row=4, column=0, sticky=W)
-        self.col_entry.grid(row=4, column=1, sticky=E)
-
-        self.draw_button.grid(row=4, column=2)
+        self.frame_format.grid(row=0, column=0, sticky=N)        
 
         #self.img_frame.grid(row=0, column=2)
         self.frame.grid(row=0, column =2)
         
-        
-    def validate(self, new_text):
-        if not new_text: # the field is being cleared
-            #return that the entry is empty
-            return True
-
-        try:
-            self.entered_number = int(new_text)
-            return True
-        except ValueError:
-            return False
-
-    def draw(self):
-        # Run when draw button is pressed
-        # Update a matrix with the loaded file
-        print("Drawing")
 
     def combo(self, master):
         self.box_value = StringVar()
