@@ -2,6 +2,7 @@ from Tkinter import *
 from PIL import ImageTk, Image
 import matplotlib
 import ttk
+from menu_commands import *
 
 matplotlib.use('TkAgg')
 
@@ -99,7 +100,8 @@ class TSM_ImageView:
         self.box['values'] = ('A', 'B', 'C')
         self.box.current(0)
         self.box.grid(column=2, row=1)
-        
+
+
 
 root = Tk()
 
@@ -109,12 +111,13 @@ root.config(menu=menu)
 subMenu = Menu()
 
 menu.add_cascade(label="File", menu=subMenu)
-subMenu.add_command(label="Open image file")
+subMenu.add_command(label="Open image file", command=open_file)
 subMenu.add_command(label="Open file list")
 subMenu.add_separator()
 subMenu.add_command(label="Printing Window")
 subMenu.add_separator()
 subMenu.add_command(label="Exit", command = root.quit())
+
 
 editMenu = Menu(menu)
 menu.add_cascade(label ="Help", menu = editMenu)
