@@ -31,7 +31,7 @@ class FrameFormat(object):
         self.col_entry.grid(row=4, column=1)
 
         self.draw_button.grid(row=4, column=2)
-    
+        
     #Only numbers in the entries
     def nbr_check(self, new_text):
         if not new_text:        # the field is being cleared

@@ -4,6 +4,7 @@ Created on 28 nov. 2017
 @author: Josefine
 '''
 import matplotlib
+from matplotlib.figure import Figure
 import numpy as np
 import pylab as plt
 import matplotlib.patches as patches
@@ -12,7 +13,8 @@ import matplotlib.path as path
 class Hist(object):
     
     def __init__(self, img):
-        fig, ax = plt.subplots()
+        self.fig = Figure(figsize=(4,2), dpi=100)
+        ax = self.fig.add_subplot(111)        
         
         n, bins = np.histogram(img)
         
@@ -40,5 +42,5 @@ class Hist(object):
         
     # return the figure
     def figure(self):
-        return plt.gcf()
+        return self.fig
         

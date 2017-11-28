@@ -9,26 +9,33 @@ from matplotlib.backend_bases import key_press_handler
 from MenuBar import MenuBar
 from FrameFormat import FrameFormat
 from Hist import Hist
+from FrameScale import FrameScale
 
 
 class TSM_ImageView:
     # Divide in to MVC model, or just separate classes 
     def __init__(self, master):
         self.master = master
-        self.combo()
+        
         master.title("TSM Image View")
         
+        self.frame_left = Frame(master, width=200)
+        self.frame_right = Frame(master)
+        
+        self.combo(self.frame_right)
         # Menu
         MenuBar(master)
         
         # Create format frame with widgets
-        self.frame_format = Frame(master)
+        self.frame_format = Frame(self.frame_left)
         frameF = FrameFormat(master, self.frame_format)
         # get entry value frameF.col_entry.get() 
+        self.frame_scale = Frame(self.frame_left)
+        frameS = FrameScale(master, self.frame_scale)
         
         # Load an image file
         a = np.fromfile('wa_cl00011.img', dtype=np.uint8)
-
+        print(type(a), np.size(a))
         # Reshape to the right rows and cols
         a = a.reshape(200,200)
 
@@ -39,7 +46,7 @@ class TSM_ImageView:
         plt.colorbar(im, orientation = 'vertical')
         f = plt.gcf()
 
-        self.frame_map = Frame(master) 
+        self.frame_map = Frame(self.frame_right) 
         canvas_map = FigureCanvasTkAgg(f, self.frame_map)
         canvas_map.show()
         canvas_map.get_tk_widget().pack()
@@ -51,30 +58,31 @@ class TSM_ImageView:
         # Display Histogram
         hist = Hist(a)
         raster_hist = hist.figure()
-        
-        self.frame_hist = Frame(master) 
+        self.frame_hist = Frame(self.frame_left) 
         canvas_hist = FigureCanvasTkAgg(raster_hist, self.frame_hist)
         canvas_hist.show()
-        canvas_hist.get_tk_widget().pack()
+        canvas_hist.get_tk_widget().pack(fill=BOTH, expand=YES)
 
         # toolbar = NavigationToolbar2TkAgg(canvas_hist, self.frame)
         # toolbar.update()
         canvas_hist._tkcanvas.pack()
         
         # Layout - widget positioning
-        self.frame_format.pack(side=LEFT, fill=BOTH)        
-
-        self.frame_map.pack(fill=BOTH, expand=TRUE)
+        self.frame_left.pack(side=LEFT, fill=BOTH, expand=YES, padx=5, pady=5)
+        self.frame_right.pack(side=LEFT, fill=BOTH, expand=YES, padx=5, pady=5)
         
+        self.frame_format.pack()
         self.frame_hist.pack()
+        self.frame_scale.pack()
+        self.frame_map.pack()
         
-    def combo(self):
+    def combo(self, frame):
         self.box_value = StringVar()
-        self.box = ttk.Combobox(self.master, textvariable=self.box_value, 
+        self.box = ttk.Combobox(frame, textvariable=self.box_value, 
                                 state='readonly')
         self.box['values'] = ('A', 'B', 'C')
         self.box.current(0)
-        self.box.pack(side=BOTTOM)
+        self.box.pack()
     
     def on_closing(self):
             # messegebox asking for exits
