@@ -6,6 +6,7 @@ import numpy as np
 import pylab as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 from matplotlib.backend_bases import key_press_handler
+from MenuBar import MenuBar
 
 
 class TSM_ImageView:
@@ -16,21 +17,7 @@ class TSM_ImageView:
         master.title("TSM Image View")
         
         # Menu
-        menu = Menu(root)
-        master.config(menu=menu)        
-        subMenu = Menu()        
-        menu.add_cascade(label="File", menu=subMenu)
-        subMenu.add_command(label="Open image file")
-        subMenu.add_command(label="Open file list")
-        subMenu.add_separator()
-        subMenu.add_command(label="Printing Window")
-        subMenu.add_separator()
-        subMenu.add_command(label="Exit", command = root.quit())
-        
-        editMenu = Menu(menu)
-        menu.add_cascade(label ="Help", menu = editMenu)
-        editMenu.add_command(label="About")
-        
+        MenuBar(master)
         # Widgets
         self.frame_left = Frame(master)
         self.main_label =  Label(self.frame_left, text = "TIMESAT image viewer")
