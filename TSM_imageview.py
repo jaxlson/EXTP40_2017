@@ -44,13 +44,13 @@ class TSM_ImageView:
 
         toolbar = NavigationToolbar2TkAgg(canvas, self.frame)
         toolbar.update()
-        canvas._tkcanvas.pack()
+        canvas._tkcanvas.pack(fill=BOTH, expand=TRUE)
 
         # Layout - widget positioning
-        self.frame_format.grid(row=0, column=0, sticky=N)        
+        self.frame_format.pack(side=LEFT, fill=BOTH, expand=TRUE)        
 
         #self.img_frame.grid(row=0, column=2)
-        self.frame.grid(row=0, column =2)
+        self.frame.pack(side=LEFT, fill=BOTH, expand=TRUE)
         
 
     def combo(self, master):
@@ -59,7 +59,7 @@ class TSM_ImageView:
                                 state='readonly')
         self.box['values'] = ('A', 'B', 'C')
         self.box.current(0)
-        self.box.grid(column=2, row=1)
+        self.box.pack(side=BOTTOM)
     
     def on_closing(self):
             # messegebox asking for exits
