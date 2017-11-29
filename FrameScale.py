@@ -3,17 +3,31 @@ Created on 28 nov. 2017
 
 @author: Josefine
 '''
-from Tkinter import Label, Entry, Scale, HORIZONTAL
+from Tkinter import Label, Entry, Scale, HORIZONTAL, IntVar, END
 
 class FrameScale(object):
  
     def __init__(self, master, frame):
+        self.min_var = IntVar()
+        self.max_var = IntVar()
+        
         self.min_label = Label(frame, text = "Min.")
         self.max_label = Label(frame, text = "Max.")
-        self.min_entry = Entry(frame)
-        self.max_entry = Entry(frame)
-        self.min_scale = Scale(frame, orient=HORIZONTAL)
-        self.max_scale = Scale(frame, orient=HORIZONTAL)
+        self.min_entry = Entry(frame, textvariable=self.min_var)
+        self.max_entry = Entry(frame, textvariable=self.max_var)
+        self.min_entry.bind("<Return>", 
+                            lambda event: entry_change(self.min_scale,self.min_var.get()))
+        self.max_entry.bind("<Return>", 
+                            lambda event: entry_change(self.max_scale,self.max_var.get()))
+        
+        def min_change(val):
+            self.min_var.set(val)
+        
+        def max_change(val):
+            self.max_var.set(val)
+            
+        self.min_scale = Scale(frame, orient=HORIZONTAL, command=min_change)
+        self.max_scale = Scale(frame, orient=HORIZONTAL, command=max_change)
         
         self.min_label.grid(row=0, column=0)
         self.max_label.grid(row=1, column=0)
@@ -22,5 +36,12 @@ class FrameScale(object):
         self.min_scale.grid(row=0, column=2)
         self.max_scale.grid(row=1, column=2)
         
+        def entry_change(scale, value):
+            scale.configure(from_=value-20, to=value+20)
+            scale.set(value)
         
+        def check_values(min,max):
+            # Min should not be greater then Max (Min -> Max-1)
+            # Max should not be smaller then Min (Max -> Min+1)
+            pass
         
