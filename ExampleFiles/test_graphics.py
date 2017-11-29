@@ -6,8 +6,7 @@ from compiler.pycodegen import EXCEPT
 
 
 def file_dialog():
-    f = tkFileDialog.askopenfilename()
-
+    f = tkFileDialog.askopenfilename() #opens the dialog and gets the name of the choosen file
     if f is not None:
         return f
 
