@@ -10,12 +10,12 @@ ang returnera värde från command?
 *Ändra färgschema (välj från drop-down)
 **Bilden ritas om automatiskt
 
-*Visa gränsvärden
+-Visa gränsvärden
 *Ändra gränsvärden
 **Bilden ritas om automatiskt
 *Hantera felaktig input
 
-*Visa histogram
+-Visa histogram
 ** Ändras automatiskt när gränsvärden ändras
 
 *File list?
