@@ -18,11 +18,12 @@ class TSM_ImageView:
     def __init__(self, master):
  
         master.title("TSM Image View")
-        
+
         # Create frames for right and left "columns"
         self.frame_left = Frame(master, width=200)
         self.frame_right = Frame(master)
-        
+
+        filename = 'default'
         # Menu
         MenuBar(master)
         

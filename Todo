@@ -6,13 +6,14 @@ Att göra (i ungefär den här ordningen)
 *Läsa in antal rader och kolumner från textrutor (användarinput)
 *Rita upp bilden när man trycker på "Draw"-knapp
 *Hantera felaktig input
-
+ang returnera värde från command?
 *Ändra färgschema (välj från drop-down)
 **Bilden ritas om automatiskt
 
 *Visa gränsvärden
 *Ändra gränsvärden
 **Bilden ritas om automatiskt
+*Hantera felaktig input
 
 *Visa histogram
 ** Ändras automatiskt när gränsvärden ändras
