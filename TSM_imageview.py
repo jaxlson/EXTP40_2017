@@ -1,6 +1,5 @@
-from Tkinter import *
+from Tkinter import Tk, Frame, LEFT, BOTH, YES 
 import matplotlib
-import ttk
 
 matplotlib.use('TkAgg')
 import numpy as np
@@ -11,6 +10,7 @@ from FrameFormat import FrameFormat
 from FrameScale import FrameScale
 from FrameView import FrameView
 from FrameHist import FrameHist
+from ComboBox import ComboBox
 
 
 class TSM_ImageView:
@@ -43,16 +43,8 @@ class TSM_ImageView:
         frameS = FrameScale(a, self.frame_scale)
         
         # Create combobox for colormap selection
-        box_value = StringVar()
-        self.box = ttk.Combobox(self.frame_right, textvariable=box_value, state='readonly')
-        self.box['values'] = ('jet', 'parula', 'hsv','hot','cool',
-                              'spring','summer','autumn','winter',
-                              'grey','bone','copper','pink','colorcube')
-        
-        self.box.bind("<<ComboboxSelected>>", self.select_cmap)
-        self.box.current(0)
-        self.box.pack()
-        
+        combo = ComboBox(self.frame_right)
+                
         # Create map frame with widgets
         self.frame_map=Frame(self.frame_right)
         frameV = FrameView(self.frame_map,a)
@@ -66,9 +58,7 @@ class TSM_ImageView:
         self.frame_scale.pack()
         self.frame_map.pack()
     
-    def select_cmap(self, event):
-            print(self.box.get())
-            
+    # Closing window and plots            
     def on_closing(self):
             # messegebox asking for exits
             plt.close('all')
