@@ -12,7 +12,6 @@ from FrameView import FrameView
 from FrameHist import FrameHist
 from ComboBox import ComboBox
 
-
 class TSM_ImageView:
     # Divide in to MVC model, or just separate classes 
     def __init__(self, master):
