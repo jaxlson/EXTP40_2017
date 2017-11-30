@@ -32,13 +32,13 @@ class TSM_ImageView:
         frameF = FrameFormat(master, self.frame_format)
         # get entry value frameF.col_entry.get() 
         
-        # Create format frame with widgets
-        self.frame_scale = Frame(self.frame_left)
-        frameS = FrameScale(master, self.frame_scale)
-        
         # Load an image file
         a = np.fromfile('wa_cl00011.img', dtype=np.uint8)
-
+        
+        # Create format frame with widgets
+        self.frame_scale = Frame(self.frame_left)
+        frameS = FrameScale(a, self.frame_scale)
+        
         # Reshape to the right rows and cols
         a = a.reshape(200,200)
 

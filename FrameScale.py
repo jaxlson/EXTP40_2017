@@ -4,10 +4,13 @@ Created on 28 nov. 2017
 @author: Josefine
 '''
 from Tkinter import Label, Entry, Scale, HORIZONTAL, IntVar, END
+import numpy as np
 
 class FrameScale(object):
  
-    def __init__(self, master, frame):
+    def __init__(self, a, frame):
+        max = np.amax(a)
+        min = np.amin(a)
         self.min_var = IntVar()
         self.max_var = IntVar()
         
@@ -26,8 +29,8 @@ class FrameScale(object):
         def max_change(val):
             self.max_var.set(val)
             
-        self.min_scale = Scale(frame, orient=HORIZONTAL, command=min_change)
-        self.max_scale = Scale(frame, orient=HORIZONTAL, command=max_change)
+        self.min_scale = Scale(frame, orient=HORIZONTAL, from_=min, to=max-1, command=min_change)
+        self.max_scale = Scale(frame, orient=HORIZONTAL, from_=min+1, to=max, command=max_change)
         
         self.min_label.grid(row=0, column=0)
         self.max_label.grid(row=1, column=0)
