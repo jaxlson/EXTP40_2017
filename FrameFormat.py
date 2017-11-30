@@ -3,7 +3,7 @@ Created on 28 nov. 2017
 
 @author: Josefine
 '''
-from Tkinter import Label, Entry, Button
+from Tkinter import Label, Entry, Button, IntVar
 
 class FrameFormat(object):
 
@@ -16,8 +16,12 @@ class FrameFormat(object):
         self.col_label = Label(frame, text = "Nbr of columns")
 
         vcmd = master.register(self.nbr_check) # we have to wrap the command
-        self.row_entry = Entry(frame, validate="key", validatecommand=(vcmd, '%P'))
-        self.col_entry = Entry(frame, validate="key", validatecommand=(vcmd, '%P'))
+        
+        self.row_var = IntVar()
+        self.col_var = IntVar()
+        
+        self.row_entry = Entry(frame, validate="key", validatecommand=(vcmd, '%P'), textvariable = self.row_var)
+        self.col_entry = Entry(frame, validate="key", validatecommand=(vcmd, '%P'), textvariable = self.col_var)
 
         self.draw_button = Button(frame, text="Draw", command=lambda: self.draw())
         

@@ -9,19 +9,21 @@ import numpy as np
 class FrameScale(object):
  
     def __init__(self, a, frame):
-        max = np.amax(a)
-        min = np.amin(a)
-        self.min_var = IntVar()
-        self.max_var = IntVar()
+        # Image min and max values
+        self.max = np.amax(a)
+        self.min = np.amin(a)
+        
+        self.min_var = IntVar(value=self.min)
+        self.max_var = IntVar(value=self.max)
         
         self.min_label = Label(frame, text = "Min.")
         self.max_label = Label(frame, text = "Max.")
+        
         self.min_entry = Entry(frame, textvariable=self.min_var)
         self.max_entry = Entry(frame, textvariable=self.max_var)
-        self.min_entry.bind("<Return>", 
-                            lambda event: entry_change(self.min_scale,self.min_var.get()))
-        self.max_entry.bind("<Return>", 
-                            lambda event: entry_change(self.max_scale,self.max_var.get()))
+        
+        self.min_entry.bind("<Return>", lambda event: entry_change(self.min_scale,self.min_var.get()))
+        self.max_entry.bind("<Return>", lambda event: entry_change(self.max_scale,self.max_var.get()))
         
         def min_change(val):
             self.min_var.set(val)
@@ -29,9 +31,12 @@ class FrameScale(object):
         def max_change(val):
             self.max_var.set(val)
             
-        self.min_scale = Scale(frame, orient=HORIZONTAL, from_=min, to=max-1, command=min_change)
-        self.max_scale = Scale(frame, orient=HORIZONTAL, from_=min+1, to=max, command=max_change)
+        self.min_scale = Scale(frame, orient=HORIZONTAL, from_=self.min, to=self.max-1, command=min_change)
+        self.max_scale = Scale(frame, orient=HORIZONTAL, from_=self.min+1, to=self.max, command=max_change)
         
+        self.min_scale.set(self.min)
+        self.max_scale.set(self.max)
+               
         self.min_label.grid(row=0, column=0)
         self.max_label.grid(row=1, column=0)
         self.min_entry.grid(row=0, column=1)
@@ -47,4 +52,4 @@ class FrameScale(object):
             # Min should not be greater then Max (Min -> Max-1)
             # Max should not be smaller then Min (Max -> Min+1)
             pass
-        
+        self.max_var.set(self.max)
