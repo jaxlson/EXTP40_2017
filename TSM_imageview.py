@@ -1,18 +1,16 @@
 from Tkinter import *
 import matplotlib
 import ttk
-from FrameView import FrameView
 
 matplotlib.use('TkAgg')
 import numpy as np
 import pylab as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.backend_bases import key_press_handler
 from MenuBar import MenuBar
 from FrameFormat import FrameFormat
-from Hist import Hist
 from FrameScale import FrameScale
 from FrameView import FrameView
+from FrameHist import FrameHist
 
 
 class TSM_ImageView:
@@ -36,15 +34,10 @@ class TSM_ImageView:
         frameF = FrameFormat(master, self.frame_format)
             # get entry value frameF.col_entry.get()
         
-        # Display Histogram
-        hist = Hist(a)
-        raster_hist = hist.figure()
-        self.frame_hist = Frame(self.frame_left) 
-        canvas_hist = FigureCanvasTkAgg(raster_hist, self.frame_hist)
-        canvas_hist.show()
-        canvas_hist.get_tk_widget().pack(fill=BOTH, expand=YES)
-        canvas_hist._tkcanvas.pack()
-        
+        # Create histogram
+        self.frame_hist = Frame(self.frame_left)
+        frameH = FrameHist(self.frame_hist, a) 
+                
         # Create scale frame with widgets
         self.frame_scale = Frame(self.frame_left)
         frameS = FrameScale(a, self.frame_scale)

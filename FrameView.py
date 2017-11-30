@@ -12,8 +12,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolb
 from Tkinter import *
 
 class FrameView(object):
-
-
+    
     def __init__(self, frame, a):
         # Reshape to the right rows and cols
         a = a.reshape(200,200)

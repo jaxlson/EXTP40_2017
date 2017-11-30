@@ -7,7 +7,6 @@ from Tkinter import Label, Entry, Button, IntVar
 
 class FrameFormat(object):
 
-
     def __init__(self, master, frame):
         self.main_label =  Label(frame, text = "TIMESAT image viewer")
         self.type_label = Label(frame, text = "Image file type")
@@ -50,4 +49,5 @@ class FrameFormat(object):
         # Run when draw button is pressed
         # Update a matrix with the loaded file
         print('Drawing','Row entry', self.row_entry.get(),
-              'Column entry', self.col_entry.get())   
+              'Column entry', self.col_entry.get())
+       
