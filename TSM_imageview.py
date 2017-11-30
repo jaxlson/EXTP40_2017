@@ -63,7 +63,16 @@ class TSM_ImageView:
         canvas_hist.get_tk_widget().pack(fill=BOTH, expand=YES)
         canvas_hist._tkcanvas.pack()
         
-        self.combo(self.frame_right)
+        box_value = StringVar()
+        self.box = ttk.Combobox(self.frame_right, textvariable=box_value, state='readonly')
+        self.box['values'] = ('jet', 'parula', 'hsv','hot','cool',
+                              'spring','summer','autumn','winter',
+                              'grey','bone','copper','pink','colorcube')
+        
+        self.box.bind("<<ComboboxSelected>>", self.select_cmap)
+        self.box.current(0)
+        self.box.pack()
+        
         
         # Layout - widget positioning
         self.frame_left.pack(side=LEFT, fill=BOTH, expand=YES, padx=5, pady=5)
@@ -73,17 +82,10 @@ class TSM_ImageView:
         self.frame_hist.pack()
         self.frame_scale.pack()
         self.frame_map.pack()
-        
-    def combo(self, frame):
-        # cmaps: jet, parula, hsv, hot, cool, spring, summer, autumn, winter
-        #        grey, bone, copper, pink, colorcube,  
-        self.box_value = StringVar()
-        self.box = ttk.Combobox(frame, textvariable=self.box_value, 
-                                state='readonly')
-        self.box['values'] = ('A', 'B', 'C')
-        self.box.current(0)
-        self.box.pack()
     
+    def select_cmap(self, event):
+            print(self.box.get())
+            
     def on_closing(self):
             # messegebox asking for exits
             plt.close('all')
