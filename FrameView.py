@@ -9,7 +9,7 @@ import matplotlib
 
 matplotlib.use('TkAgg')
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
-from Tkinter import *
+from Tkinter import BOTH, TRUE
 
 class FrameView(object):
     
@@ -18,15 +18,20 @@ class FrameView(object):
         a = a.reshape(200,200)
 
         # Display the image
-        im = plt.imshow(a, cmap= 'brg')
-        plt.colorbar(im, orientation = 'vertical')
+        self.im = plt.imshow(a, cmap= 'brg')
+        plt.colorbar(self.im, orientation = 'vertical')
         f = plt.gcf() 
-        canvas_map = FigureCanvasTkAgg(f, frame)
-        canvas_map.show()
-        canvas_map.get_tk_widget().pack()
-        toolbar = NavigationToolbar2TkAgg(canvas_map, frame)
+        self.canvas_map = FigureCanvasTkAgg(f, frame)
+        self.canvas_map.show()
+        self.canvas_map.get_tk_widget().pack()
+        toolbar = NavigationToolbar2TkAgg(self.canvas_map, frame)
         toolbar.update()
-        canvas_map._tkcanvas.pack(fill=BOTH, expand=TRUE)
-    
+        self.canvas_map._tkcanvas.pack(fill=BOTH, expand=TRUE)
+        
     def get_array(self):
-        return self.a   
+        return self.a
+    
+    def change_cmap(self, colormap):
+        self.im.set_cmap(colormap)
+        self.canvas_map.draw()
+           

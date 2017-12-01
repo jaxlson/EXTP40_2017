@@ -7,8 +7,8 @@ Att göra (i ungefär den här ordningen)
 *Rita upp bilden när man trycker på "Draw"-knapp
 *Hantera felaktig input
 ang returnera värde från command?
-*Ändra färgschema (välj från drop-down)
-**Bilden ritas om automatiskt
+-Ändra färgschema (välj från drop-down)
+-Bilden ritas om automatiskt
 
 -Visa gränsvärden
 *Ändra gränsvärden

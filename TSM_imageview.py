@@ -40,13 +40,13 @@ class TSM_ImageView:
         # Create scale frame with widgets
         self.frame_scale = Frame(self.frame_left)
         frameS = FrameScale(a, self.frame_scale)
-        
-        # Create combobox for colormap selection
-        combo = ComboBox(self.frame_right)
-                
+            
         # Create map frame with widgets
         self.frame_map=Frame(self.frame_right)
         frameV = FrameView(self.frame_map,a)
+        
+        # Create combobox for colormap selection
+        combo = ComboBox(self.frame_right, frameV)
         
         # Layout - widget positioning
         self.frame_left.pack(side=LEFT, fill=BOTH, expand=YES, padx=5, pady=5)
