@@ -37,12 +37,12 @@ class FrameScale(object):
         self.min_scale.set(self.min)
         self.max_scale.set(self.max)
                
-        self.min_label.grid(row=0, column=0)
-        self.max_label.grid(row=1, column=0)
+        self.min_label.grid(row=0, column=0, sticky='w')
+        self.max_label.grid(row=1, column=0, sticky='w')
         self.min_entry.grid(row=0, column=1)
         self.max_entry.grid(row=1, column=1)
-        self.min_scale.grid(row=0, column=2)
-        self.max_scale.grid(row=1, column=2)
+        self.min_scale.grid(row=0, column=2, sticky='e')
+        self.max_scale.grid(row=1, column=2, sticky='e')
         
         def entry_change(scale, value):
             scale.configure(from_=value-20, to=value+20)

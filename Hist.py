@@ -13,7 +13,7 @@ import matplotlib.path as path
 class Hist(object):
     
     def __init__(self, img):
-        self.fig = Figure(figsize=(4,2), dpi=100)
+        self.fig = Figure(figsize=(5,2), dpi=100)
         ax = self.fig.add_subplot(111)        
         
         n, bins = np.histogram(img)

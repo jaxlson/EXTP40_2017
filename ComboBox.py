@@ -14,7 +14,7 @@ class ComboBox(object):
         self.box = ttk.Combobox(frame, textvariable=box_value, state='readonly')
         self.box['values'] = ('jet', 'parula', 'hsv','hot','cool',
                               'spring','summer','autumn','winter',
-                              'grey','bone','copper','pink','colorcube')
+                              'gray','bone','copper','pink','colorcube')
         
         self.box.bind("<<ComboboxSelected>>", self.select_cmap)
         self.box.current(0)

@@ -24,16 +24,16 @@ class FrameFormat(object):
 
         self.draw_button = Button(frame, text="Draw", command=lambda: self.draw())
         
-        self.main_label.grid(row=0, column=0)
-        self.type_label.grid(row=1, column=0)
-        self.order_label.grid(row=2, column=0)
+        self.main_label.grid(row=0, column=0, sticky='w')
+        self.type_label.grid(row=1, column=0, sticky='w')
+        self.order_label.grid(row=2, column=0, sticky='w')
 
-        self.row_label.grid(row=3, column=0)
-        self.row_entry.grid(row=3, column=1)
-        self.col_label.grid(row=4, column=0)
-        self.col_entry.grid(row=4, column=1)
+        self.row_label.grid(row=3, column=0, sticky='w')
+        self.row_entry.grid(row=3, column=1, sticky='e')
+        self.col_label.grid(row=4, column=0, sticky='w')
+        self.col_entry.grid(row=4, column=1, sticky='e')
 
-        self.draw_button.grid(row=4, column=2)
+        self.draw_button.grid(row=4, column=2, sticky='e')
         
     #Only numbers in the entries
     def nbr_check(self, new_text):

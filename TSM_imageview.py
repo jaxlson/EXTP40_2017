@@ -1,10 +1,9 @@
-from Tkinter import Tk, Frame, LEFT, BOTH, YES 
+from Tkinter import Tk, Frame, LEFT, BOTH, YES, Y 
 import matplotlib
 
 matplotlib.use('TkAgg')
 import numpy as np
 import pylab as plt
-from matplotlib.backend_bases import key_press_handler
 from MenuBar import MenuBar
 from FrameFormat import FrameFormat
 from FrameScale import FrameScale
@@ -19,7 +18,7 @@ class TSM_ImageView:
         master.title("TSM Image View")
 
         # Create frames for right and left "columns"
-        self.frame_left = Frame(master, width=200)
+        self.frame_left = Frame(master)
         self.frame_right = Frame(master)
 
         filename = 'default'
@@ -49,13 +48,13 @@ class TSM_ImageView:
         combo = ComboBox(self.frame_right, frameV)
         
         # Layout - widget positioning
-        self.frame_left.pack(side=LEFT, fill=BOTH, expand=YES, padx=5, pady=5)
-        self.frame_right.pack(side=LEFT, fill=BOTH, expand=YES, padx=5, pady=5)
+        self.frame_left.pack(side=LEFT, fill=Y, padx=5, pady=5)
+        self.frame_right.pack(fill=BOTH, expand=True, padx=5, pady=5)
         
-        self.frame_format.pack()
-        self.frame_hist.pack()
-        self.frame_scale.pack()
-        self.frame_map.pack()
+        self.frame_format.pack(fill=Y, expand=True)
+        self.frame_hist.pack(fill=Y, expand=True)
+        self.frame_scale.pack(fill=Y,expand=True)
+        self.frame_map.pack(fill=BOTH, expand=True)
     
     # Closing window and plots            
     def on_closing(self):
