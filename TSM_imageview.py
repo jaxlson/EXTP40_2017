@@ -1,5 +1,5 @@
-from Tkinter import Tk, Frame, LEFT, BOTH, YES, Y 
-import matplotlib
+from Tkinter import Tk, Frame, LEFT, BOTH, BOTTOM, Y 
+import matplotlib 
 
 matplotlib.use('TkAgg')
 import numpy as np
@@ -51,9 +51,9 @@ class TSM_ImageView:
         self.frame_left.pack(side=LEFT, fill=Y, padx=5, pady=5)
         self.frame_right.pack(fill=BOTH, expand=True, padx=5, pady=5)
         
-        self.frame_format.pack(fill=Y, expand=True)
-        self.frame_hist.pack(fill=Y, expand=True)
-        self.frame_scale.pack(fill=Y,expand=True)
+        self.frame_format.pack(expand=True)
+        self.frame_hist.pack(fill=Y, expand=True, padx=10, pady=20)
+        self.frame_scale.pack(side= BOTTOM, expand=True)
         self.frame_map.pack(fill=BOTH, expand=True)
     
     # Closing window and plots            
