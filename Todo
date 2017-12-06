@@ -3,7 +3,7 @@ Att göra (i ungefär den här ordningen)
 -Läsa in fil via dialogruta ("file chooser")
 --Öppna dialogruta via menyknapp
 --Välja fil
-*Läsa in antal rader och kolumner från textrutor (användarinput)
+-Läsa in antal rader och kolumner från textrutor (användarinput)
 *Rita upp bilden när man trycker på "Draw"-knapp
 *Hantera felaktig input
 ang returnera värde från command?

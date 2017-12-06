@@ -20,12 +20,11 @@ class TSM_ImageView:
         # Create frames for right and left "columns"
         self.frame_left = Frame(master)
         self.frame_right = Frame(master)
-
-        filename = 'default'
-        a = np.fromfile('wa_cl00011.img', dtype=np.uint8)
         
         # Menu
         MenuBar(master)
+        filename = 'default'
+        a = np.fromfile('wa_nd99113.img', dtype=np.uint8)
         
         # Create format frame with widgets
         self.frame_format = Frame(self.frame_left)
@@ -61,7 +60,7 @@ class TSM_ImageView:
             # messegebox asking for exits
             plt.close('all')
             root.destroy()  
-
+    
 root = Tk() 
 my_gui = TSM_ImageView(root)
 root.protocol("WM_DELETE_WINDOW", my_gui.on_closing)
