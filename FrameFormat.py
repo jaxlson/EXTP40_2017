@@ -8,7 +8,7 @@ from Tkinter import Label, Entry, Button, IntVar
 class FrameFormat(object):
 
     def __init__(self, master, frame):
-        self.main_label =  Label(frame, text = "TIMESAT image viewer")
+        self.main_label = Label(frame, text = "TIMESAT image viewer")
         self.type_label = Label(frame, text = "Image file type")
         self.order_label = Label(frame, text = "Byte order")
         self.row_label = Label(frame, text = "Nbr of rows")
@@ -45,7 +45,7 @@ class FrameFormat(object):
         except ValueError:
             return False
         
-    def draw(self):
+    def draw(self, filename):
         # Run when draw button is pressed
         # Update a matrix with the loaded file
         print('Drawing','Row entry', self.row_entry.get(),

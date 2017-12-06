@@ -27,7 +27,7 @@ class MenuBar(object):
         menu.add_cascade(label ="Help", menu = editMenu)
         editMenu.add_command(label="About", command=self.about)
 
-    def open_file(self):
+    def open_file(self,):
         f = file_dialog()
         print 'Open file: ', f
 

@@ -1,4 +1,4 @@
-from Tkinter import Tk, Frame, LEFT, BOTH, BOTTOM, Y 
+from Tkinter import Tk, Frame, LEFT, BOTH, BOTTOM, Y, Text
 import matplotlib 
 
 matplotlib.use('TkAgg')
@@ -10,6 +10,7 @@ from FrameScale import FrameScale
 from FrameView import FrameView
 from FrameHist import FrameHist
 from ComboBox import ComboBox
+from FilePathText import FilePathText
 
 class TSM_ImageView:
     # Divide in to MVC model, or just separate classes 
@@ -22,8 +23,8 @@ class TSM_ImageView:
         self.frame_right = Frame(master)
         
         # Menu
-        MenuBar(master)
         filename = 'default'
+        MenuBar(master)
         a = np.fromfile('wa_nd99113.img', dtype=np.uint8)
         
         # Create format frame with widgets
@@ -45,6 +46,9 @@ class TSM_ImageView:
         
         # Create combobox for colormap selection
         combo = ComboBox(self.frame_right, frameV)
+
+        # Write the file path
+        FilePathText(master)
         
         # Layout - widget positioning
         self.frame_left.pack(side=LEFT, fill=Y, padx=5, pady=5)
