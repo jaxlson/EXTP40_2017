@@ -20,8 +20,8 @@ class FrameView(object):
         # Display the image
         self.im = plt.imshow(a, cmap= 'brg')
         plt.colorbar(self.im, orientation = 'vertical')
-        f = plt.gcf() 
-        self.canvas_map = FigureCanvasTkAgg(f, frame)
+        self.f = plt.gcf() 
+        self.canvas_map = FigureCanvasTkAgg(self.f, frame)
         self.canvas_map.show()
         self.canvas_map.get_tk_widget().pack()
         toolbar = NavigationToolbar2TkAgg(self.canvas_map, frame)
@@ -34,4 +34,7 @@ class FrameView(object):
     def change_cmap(self, colormap):
         self.im.set_cmap(colormap)
         self.canvas_map.draw()
-           
+    
+    def change_clim(self, vmin, vmax):
+        self.im.set_clim(vmin,vmax)
+        self.canvas_map.draw()

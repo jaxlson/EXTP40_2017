@@ -8,7 +8,8 @@ import numpy as np
 
 class FrameScale(object):
  
-    def __init__(self, a, frame):
+    def __init__(self, a, frame, view):
+        self.view = view
         # Image min and max values
         self.max = np.amax(a)
         self.min = np.amin(a)
@@ -27,10 +28,12 @@ class FrameScale(object):
         
         def min_change(val):
             self.min_var.set(val)
+            self.view.change_clim(int(val),self.max_var.get())
         
         def max_change(val):
             self.max_var.set(val)
-            
+            self.view.change_clim(self.min_var.get(), int(val))
+        
         self.min_scale = Scale(frame, orient=HORIZONTAL, from_=self.min, to=self.max-1, command=min_change)
         self.max_scale = Scale(frame, orient=HORIZONTAL, from_=self.min+1, to=self.max, command=max_change)
         

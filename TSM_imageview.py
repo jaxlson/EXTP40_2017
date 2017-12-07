@@ -35,14 +35,14 @@ class TSM_ImageView:
         # Create histogram
         self.frame_hist = Frame(self.frame_left)
         frameH = FrameHist(self.frame_hist, a) 
-                
-        # Create scale frame with widgets
-        self.frame_scale = Frame(self.frame_left)
-        frameS = FrameScale(a, self.frame_scale)
             
         # Create map frame with widgets
         self.frame_map=Frame(self.frame_right)
         frameV = FrameView(self.frame_map,a)
+        
+        # Create scale frame with widgets
+        self.frame_scale = Frame(self.frame_left)
+        frameS = FrameScale(a, self.frame_scale, frameV)
         
         # Create combobox for colormap selection
         combo = ComboBox(self.frame_right, frameV)
