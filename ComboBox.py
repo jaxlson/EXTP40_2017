@@ -12,9 +12,9 @@ class ComboBox(object):
         self.map = map
         box_value = StringVar()
         self.box = ttk.Combobox(frame, textvariable=box_value, state='readonly')
-        self.box['values'] = ('jet', 'parula', 'hsv','hot','cool',
+        self.box['values'] = ('jet','hsv','hot','cool',
                               'spring','summer','autumn','winter',
-                              'gray','bone','copper','pink','colorcube')
+                              'gray','bone','copper','pink',)
         
         self.box.bind("<<ComboboxSelected>>", self.select_cmap)
         self.box.current(0)

@@ -28,9 +28,6 @@ class FrameView(object):
         toolbar.update()
         self.canvas_map._tkcanvas.pack(fill=BOTH, expand=TRUE)
         
-    def get_array(self):
-        return self.a
-    
     def change_cmap(self, colormap):
         self.im.set_cmap(colormap)
         self.canvas_map.draw()

@@ -43,4 +43,4 @@ class Hist(object):
     # return the figure
     def figure(self):
         return self.fig
-        
+       
