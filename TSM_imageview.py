@@ -1,5 +1,6 @@
 from Tkinter import Tk, Frame, LEFT, BOTH, BOTTOM, Y, Text
-import matplotlib 
+import matplotlib
+import matplotlib.image as mpimg
 
 matplotlib.use('TkAgg')
 import numpy as np
@@ -21,6 +22,9 @@ class TSM_ImageView:
         # Create frames for right and left "columns"
         self.frame_left = Frame(master)
         self.frame_right = Frame(master)
+        
+        # Default start pic test
+        # test_pic = mpimg.imread('default.png')
         
         # Menu
         filename = 'default'

@@ -3,14 +3,23 @@ Created on 28 nov. 2017
 
 @author: Josefine
 '''
-from Tkinter import Label, Entry, Button, IntVar
+from Tkinter import Label, Entry, Button, IntVar, StringVar
+import ttk
 
 class FrameFormat(object):
 
     def __init__(self, master, frame):
         self.main_label = Label(frame, text = "TIMESAT image viewer")
         self.type_label = Label(frame, text = "Image file type")
+        type_box_value = StringVar()
+        self.type_box = ttk.Combobox(frame, textvariable=type_box_value, state='readonly')
+        self.type_box['values'] = ('8-bit unsigned integer', '16-bit signed integer', '32-bit real',)
+        self.type_box.current(0)
         self.order_label = Label(frame, text = "Byte order")
+        order_box_value = StringVar()
+        self.order_box = ttk.Combobox(frame, textvariable=order_box_value, state='readonly')
+        self.order_box['values'] = ('Little endian','Big endian',)
+        self.order_box.current(0)
         self.row_label = Label(frame, text = "Nbr of rows")
         self.col_label = Label(frame, text = "Nbr of columns")
 
@@ -26,7 +35,9 @@ class FrameFormat(object):
         
         self.main_label.grid(row=0, column=0, sticky='w')
         self.type_label.grid(row=1, column=0, sticky='w')
+        self.type_box.grid(row=1,column=1,sticky='e')
         self.order_label.grid(row=2, column=0, sticky='w')
+        self.order_box.grid(row=2,column=1,sticky='e')
 
         self.row_label.grid(row=3, column=0, sticky='w')
         self.row_entry.grid(row=3, column=1, sticky='e')
