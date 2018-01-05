@@ -1,6 +1,7 @@
 from Tkinter import Tk, Frame, LEFT, BOTH, BOTTOM, Y, Text
 import matplotlib
 import matplotlib.image as mpimg
+from matplotlib.cbook import Null
 
 matplotlib.use('TkAgg')
 import numpy as np
@@ -24,9 +25,10 @@ class TSM_ImageView:
         self.frame_right = Frame(master)
         
         # Default start pic/array
-        global a
-        #a = np.zeros((50,50))
-        a = np.fromfile('D:/-LTH-/-HT 17-/GIT-projekt i Python/Projekt/EXTP40_2017/EXTP40_2017/wa_cl00011.img', dtype=np.uint8)
+        # global a
+        a = np.zeros((50,50))
+        # a = np.fromfile('D:/-LTH-/-HT 17-/GIT-projekt i Python/Projekt/EXTP40_2017/EXTP40_2017/wa_cl00011.img', dtype=np.uint8)
+        self.loaded_image_file = Null
         
         # Menu
         MenuBar(self, master)
@@ -68,14 +70,16 @@ class TSM_ImageView:
     def set_image(self, f):
         # set a to the new file, update in display()
         # this does not work
-        # a = np.fromfile(f, dtype=np.uint8)
-        print f
+        f = f.encode('utf-8')
+        self.loaded_image_file = np.fromfile(f, dtype=np.uint8)
+        print f, type(f)
+        
         
     # Displays the loaded image
     # Parameters from FrameFormat: image file type, byte order, Nbr of rows, Nbr of col
     def display(self, im_type, order, row, col):
         print "drawing", im_type, order, row, col
-        self.frameV.update_plot()
+        self.frameV.update_plot(self.loaded_image_file)
     
     # Closing window and plots            
     def on_closing(self):

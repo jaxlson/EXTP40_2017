@@ -6,6 +6,7 @@ Created on 30 nov. 2017
 import numpy as np
 import pylab as plt
 import matplotlib
+from numpy import reshape, shape
 
 matplotlib.use('TkAgg')
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
@@ -16,7 +17,7 @@ class FrameView(object):
     def __init__(self, frame, img_array):
         # Reshape to the right rows and cols
         # Values from frameformat
-        img_array = img_array.reshape(200,200)
+        #img_array = img_array.reshape(200,200)
 
         # Display the image
         self.im = plt.imshow(img_array, cmap= 'brg')
@@ -37,8 +38,9 @@ class FrameView(object):
         self.im.set_clim(vmin,vmax)
         self.canvas_map.draw()
     
-    def update_plot(self):
-        # this works, need to get open image to update a (array)
-        z = np.zeros((50,50))
-        self.im.set_data(z)
+    def update_plot(self, a):
+        # reshape needs to be done in display method
+        a = a.reshape((200,200))
+        print type(a), shape(a), np.amax(a)
+        self.im.set_data(a)
         self.canvas_map.draw()
