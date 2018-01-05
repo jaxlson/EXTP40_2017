@@ -17,7 +17,7 @@ class FrameView(object):
     def __init__(self, frame, img_array):
         # Reshape to the right rows and cols
         # Values from frameformat
-        #img_array = img_array.reshape(200,200)
+        img_array = img_array.reshape(200,200)
 
         # Display the image
         self.im = plt.imshow(img_array, cmap= 'brg')

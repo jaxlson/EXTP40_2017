@@ -2,6 +2,7 @@ from Tkinter import Tk, Frame, LEFT, BOTH, BOTTOM, Y, Text
 import matplotlib
 import matplotlib.image as mpimg
 from matplotlib.cbook import Null
+from numpy import dtype
 
 matplotlib.use('TkAgg')
 import numpy as np
@@ -26,19 +27,18 @@ class TSM_ImageView:
         
         # Default start pic/array
         # global a
-        a = np.zeros((50,50))
-        # a = np.fromfile('D:/-LTH-/-HT 17-/GIT-projekt i Python/Projekt/EXTP40_2017/EXTP40_2017/wa_cl00011.img', dtype=np.uint8)
+        # a = np.zeros((50,50))
+        a = np.fromfile('wa_cl99122.img', dtype= 'uint8')
+        
         self.loaded_image_file = Null
         
         # Menu
         MenuBar(self, master)
-        # a = np.fromfile('wa_nd99113.img', dtype=np.uint8)
         
         # Create format frame with widgets
         self.frame_format = Frame(self.frame_left)
         # Use self(tsm_imageview) as parameter to call display method
         frameF = FrameFormat(self, master, self.frame_format)
-            # get entry value frameF.col_entry.get()
         
         # Create histogram
         self.frame_hist = Frame(self.frame_left)

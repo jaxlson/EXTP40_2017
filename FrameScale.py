@@ -7,7 +7,8 @@ from Tkinter import Label, Entry, Scale, HORIZONTAL, IntVar, END
 import numpy as np
 
 class FrameScale(object):
- 
+    # Buggs: When the scalebar is dragged to overlap the other the values does not update correctly
+    # The histogram should be updated when scale is changed
     def __init__(self, a, frame, view):
         self.view = view
         amin = np.amin(a)
