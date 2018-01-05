@@ -10,9 +10,12 @@ class FrameScale(object):
  
     def __init__(self, a, frame, view):
         self.view = view
+        amin = np.amin(a)
+        amax = np.amax(a)
+        
         # Image min and max values        
-        self.min_var = IntVar(value=np.amin(a))
-        self.max_var = IntVar(value=np.amax(a))
+        self.min_var = IntVar(value=amin)
+        self.max_var = IntVar(value=amax)
         
         self.min_label = Label(frame, text = "Min.")
         self.max_label = Label(frame, text = "Max.")
@@ -43,11 +46,11 @@ class FrameScale(object):
                 self.min_var.set(temp+1)
                 self.view.change_clim(temp,temp+1)
         
-        self.min_scale = Scale(frame, orient=HORIZONTAL, from_=np.amin(a), to=np.amax(a)-1, command=min_change)
-        self.max_scale = Scale(frame, orient=HORIZONTAL, from_=np.amin(a)+1, to=np.amax(a), command=max_change)
+        self.min_scale = Scale(frame, orient=HORIZONTAL, from_=amin, to=amax-1, command=min_change)
+        self.max_scale = Scale(frame, orient=HORIZONTAL, from_=amin+1, to=amax, command=max_change)
         
-        self.min_scale.set(np.amin(a))
-        self.max_scale.set(np.amax(a))
+        self.min_scale.set(amin)
+        self.max_scale.set(amax)
                
         self.min_label.grid(row=0, column=0, sticky='w')
         self.max_label.grid(row=1, column=0, sticky='w')

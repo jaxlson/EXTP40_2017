@@ -23,17 +23,19 @@ class TSM_ImageView:
         self.frame_left = Frame(master)
         self.frame_right = Frame(master)
         
-        # Default start pic test
-        # test_pic = mpimg.imread('default.png')
+        # Default start pic/array
+        global a
+        #a = np.zeros((50,50))
+        a = np.fromfile('D:/-LTH-/-HT 17-/GIT-projekt i Python/Projekt/EXTP40_2017/EXTP40_2017/wa_cl00011.img', dtype=np.uint8)
         
         # Menu
-        filename = 'default'
-        MenuBar(master)
-        a = np.fromfile('wa_nd99113.img', dtype=np.uint8)
+        MenuBar(self, master)
+        # a = np.fromfile('wa_nd99113.img', dtype=np.uint8)
         
         # Create format frame with widgets
         self.frame_format = Frame(self.frame_left)
-        frameF = FrameFormat(master, self.frame_format)
+        # Use self(tsm_imageview) as parameter to call display method
+        frameF = FrameFormat(self, master, self.frame_format)
             # get entry value frameF.col_entry.get()
         
         # Create histogram
@@ -62,6 +64,16 @@ class TSM_ImageView:
         self.frame_hist.pack(fill=Y, expand=True, padx=10, pady=20)
         self.frame_scale.pack(side= BOTTOM, expand=True)
         self.frame_map.pack(fill=BOTH, expand=True)
+    
+    def set_image(self, f):
+        # set a to the new file, update in display()
+        # a = np.fromfile(f, dtype=np.uint8)
+        print f
+        
+    # Displays the loaded image
+    # Parameters from FrameFormat: image file type, byte order, Nbr of rows, Nbr of col
+    def display(self, im_type, order, row, col):
+        print "drawing", im_type, order, row, col
     
     # Closing window and plots            
     def on_closing(self):

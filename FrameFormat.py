@@ -8,7 +8,7 @@ import ttk
 
 class FrameFormat(object):
 
-    def __init__(self, master, frame):
+    def __init__(self,gui, master, frame):
         self.main_label = Label(frame, text = "TIMESAT image viewer")
         self.type_label = Label(frame, text = "Image file type")
         type_box_value = StringVar()
@@ -22,16 +22,15 @@ class FrameFormat(object):
         self.order_box.current(0)
         self.row_label = Label(frame, text = "Nbr of rows")
         self.col_label = Label(frame, text = "Nbr of columns")
-
-        vcmd = master.register(self.nbr_check) # we have to wrap the command
-        
+   
         self.row_var = IntVar()
         self.col_var = IntVar()
         
+        vcmd = master.register(self.nbr_check) # we have to wrap the command
         self.row_entry = Entry(frame, validate="key", validatecommand=(vcmd, '%P'), textvariable = self.row_var)
         self.col_entry = Entry(frame, validate="key", validatecommand=(vcmd, '%P'), textvariable = self.col_var)
 
-        self.draw_button = Button(frame, text="Draw", command=lambda: self.draw())
+        self.draw_button = Button(frame, text="Draw", command=lambda: gui.display(self.type_box.get(), self.order_box.get(), self.row_entry.get(),self.col_entry.get()))
         
         self.main_label.grid(row=0, column=0, sticky='w')
         self.type_label.grid(row=1, column=0, sticky='w')
@@ -56,9 +55,8 @@ class FrameFormat(object):
         except ValueError:
             return False
         
-    def draw(self, filename):
+    def draw(self):
         # Run when draw button is pressed
         # Update a matrix with the loaded file
         print('Drawing','Row entry', self.row_entry.get(),
               'Column entry', self.col_entry.get())
-       

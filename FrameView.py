@@ -15,6 +15,7 @@ class FrameView(object):
     
     def __init__(self, frame, a):
         # Reshape to the right rows and cols
+        # Values from frameformat
         a = a.reshape(200,200)
 
         # Display the image

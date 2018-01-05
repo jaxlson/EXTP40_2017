@@ -7,11 +7,13 @@ Created on 28 nov. 2017
 from Tkinter import Menu
 #from menu_commands import *
 from image import *
+import numpy as np
 
 
 class MenuBar(object):
 
-    def __init__(self, master):
+    def __init__(self, gui, master):
+        self.gui = gui
         menu = Menu(master)
         master.config(menu=menu)        
         subMenu = Menu()        
@@ -27,9 +29,10 @@ class MenuBar(object):
         menu.add_cascade(label ="Help", menu = editMenu)
         editMenu.add_command(label="About", command=self.about)
 
-    def open_file(self,):
+    def open_file(self):
         f = file_dialog()
-        print 'Open file: ', f
+        self.gui.set_image(f)
+        print 'Open file: ', f, type(f)
 
     def file_list(self):
         print 'Open file list'
