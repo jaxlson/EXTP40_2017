@@ -44,14 +44,14 @@ class TSM_ImageView:
             
         # Create map frame with widgets
         self.frame_map=Frame(self.frame_right)
-        frameV = FrameView(self.frame_map,a)
+        self.frameV = FrameView(self.frame_map,a)
         
         # Create scale frame with widgets
         self.frame_scale = Frame(self.frame_left)
-        frameS = FrameScale(a, self.frame_scale, frameV)
+        frameS = FrameScale(a, self.frame_scale, self.frameV)
         
         # Create combobox for colormap selection
-        combo = ComboBox(self.frame_right, frameV)
+        combo = ComboBox(self.frame_right, self.frameV)
 
         # Write the file path
         FilePathText(master)
@@ -67,6 +67,7 @@ class TSM_ImageView:
     
     def set_image(self, f):
         # set a to the new file, update in display()
+        # this does not work
         # a = np.fromfile(f, dtype=np.uint8)
         print f
         
@@ -74,6 +75,7 @@ class TSM_ImageView:
     # Parameters from FrameFormat: image file type, byte order, Nbr of rows, Nbr of col
     def display(self, im_type, order, row, col):
         print "drawing", im_type, order, row, col
+        self.frameV.update_plot()
     
     # Closing window and plots            
     def on_closing(self):

@@ -13,13 +13,13 @@ from Tkinter import BOTH, TRUE
 
 class FrameView(object):
     
-    def __init__(self, frame, a):
+    def __init__(self, frame, img_array):
         # Reshape to the right rows and cols
         # Values from frameformat
-        a = a.reshape(200,200)
+        img_array = img_array.reshape(200,200)
 
         # Display the image
-        self.im = plt.imshow(a, cmap= 'brg')
+        self.im = plt.imshow(img_array, cmap= 'brg')
         plt.colorbar(self.im, orientation = 'vertical')
         self.f = plt.gcf() 
         self.canvas_map = FigureCanvasTkAgg(self.f, frame)
@@ -35,4 +35,10 @@ class FrameView(object):
     
     def change_clim(self, vmin, vmax):
         self.im.set_clim(vmin,vmax)
+        self.canvas_map.draw()
+    
+    def update_plot(self):
+        # this works, need to get open image to update a (array)
+        z = np.zeros((50,50))
+        self.im.set_data(z)
         self.canvas_map.draw()
