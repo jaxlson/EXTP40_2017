@@ -39,8 +39,15 @@ class FrameView(object):
         self.canvas_map.draw()
     
     def update_plot(self, a, row, col):
-        # reshape needs to be done in display method
-        a = a.reshape((200,200))
-        print type(a), shape(a), np.amax(a)
+        # TO-DO display error in gui
+        try:
+            a = a.reshape((row,col))
+        except TypeError as te:
+            print te
+            return
+        except ValueError as ve:
+            print ve
+            return
+        
         self.im.set_data(a)
         self.canvas_map.draw()
