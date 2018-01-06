@@ -30,7 +30,7 @@ class TSM_ImageView:
         # a = np.zeros((50,50))
         a = np.fromfile('wa_cl99122.img', dtype= 'uint8')
         
-        self.loaded_image_file = Null
+        self.file_path = None
         
         # Menu
         MenuBar(self, master)
@@ -69,18 +69,41 @@ class TSM_ImageView:
     
     def set_image(self, f):
         # set a to the new file, update in display()
-        # this does not work
-        f = f.encode('utf-8')
-        self.loaded_image_file = np.fromfile(f, dtype=np.uint8)
+        self.file_path = f.encode('utf-8')
         print f, type(f)
         
         
     # Displays the loaded image
     # Parameters from FrameFormat: image file type, byte order, Nbr of rows, Nbr of col
-    def display(self, im_type, order, row, col):
-        print "drawing", im_type, order, row, col
-        self.frameV.update_plot(self.loaded_image_file)
+    # Error messages should be displayed in the gui
     
+    def display(self, im_type, order, row, col):
+        row = int(row)
+        col = int(col)
+        # Check input data
+        if row == 0 or col == 0:
+            print "Rows or Columns can not be 0, enter a correct number"
+            return
+        if im_type[0] == '8':
+            im_type = 'uint8'
+        elif im_type[0] == '1' and order[0] == 'L':
+            im_type = '<iint16'
+        elif im_type[0] == '1' and order[0] == 'B':
+            im_type = '>iint16'
+        elif im_type[0] == '3' and order[0] == 'L':
+            im_type = '<float32'  
+        elif im_type[0] == '3' and order[0] == 'B':
+            im_type = '>float32'
+        else:
+            print "Wrong input"
+            return
+        if self.file_path != None:
+            # image type and order -> dtype
+            image_file = np.fromfile(self.file_path, dtype=im_type)
+            self.frameV.update_plot(image_file, row, col)
+        else:
+            print "No image loaded"
+        
     # Closing window and plots            
     def on_closing(self):
             # messegebox asking for exits

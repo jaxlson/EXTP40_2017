@@ -6,7 +6,7 @@ Created on 30 nov. 2017
 import numpy as np
 import pylab as plt
 import matplotlib
-from numpy import reshape, shape
+from numpy import shape
 
 matplotlib.use('TkAgg')
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
@@ -38,7 +38,7 @@ class FrameView(object):
         self.im.set_clim(vmin,vmax)
         self.canvas_map.draw()
     
-    def update_plot(self, a):
+    def update_plot(self, a, row, col):
         # reshape needs to be done in display method
         a = a.reshape((200,200))
         print type(a), shape(a), np.amax(a)

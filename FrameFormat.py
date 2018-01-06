@@ -54,9 +54,3 @@ class FrameFormat(object):
             return True
         except ValueError:
             return False
-        
-    def draw(self):
-        # Run when draw button is pressed
-        # Update a matrix with the loaded file
-        print('Drawing','Row entry', self.row_entry.get(),
-              'Column entry', self.col_entry.get())
