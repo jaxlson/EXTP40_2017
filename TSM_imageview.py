@@ -1,4 +1,4 @@
-from Tkinter import Tk, Frame, LEFT, BOTH, BOTTOM, Y, Text
+from Tkinter import Tk, Frame, LEFT, BOTH, BOTTOM, Y
 import matplotlib
 
 matplotlib.use('TkAgg')

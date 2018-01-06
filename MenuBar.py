@@ -5,10 +5,7 @@ Created on 28 nov. 2017
 '''
 
 from Tkinter import Menu
-#from menu_commands import *
-from image import *
-import numpy as np
-
+from image import file_dialog
 
 class MenuBar(object):
 

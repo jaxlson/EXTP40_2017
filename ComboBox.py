@@ -8,8 +8,8 @@ import ttk
 
 class ComboBox(object):
 
-    def __init__(self, frame, map):
-        self.map = map
+    def __init__(self, frame, map_):
+        self.map = map_
         box_value = StringVar()
         self.box = ttk.Combobox(frame, textvariable=box_value, state='readonly')
         self.box['values'] = ('jet','hsv','hot','cool',
