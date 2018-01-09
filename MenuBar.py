@@ -5,7 +5,7 @@ Created on 28 nov. 2017
 '''
 
 from Tkinter import Menu
-from image import file_dialog
+import tkFileDialog
 
 class MenuBar(object):
 
@@ -27,7 +27,7 @@ class MenuBar(object):
         editMenu.add_command(label="About", command=self.about)
 
     def open_file(self):
-        f = file_dialog()
+        f = tkFileDialog.askopenfilename()       
         self.gui.set_image(f)
 
     def file_list(self):

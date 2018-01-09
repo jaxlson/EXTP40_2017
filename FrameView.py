@@ -12,10 +12,11 @@ from Tkinter import BOTH, TRUE
 
 class FrameView(object):
     
-    def __init__(self, frame, img_array):
+    def __init__(self, frame, img_array, frameV):
         # Reshape to the right rows and cols
         # Values from frameformat
         img_array = img_array.reshape(200,200)
+        self.frameV = frameV
 
         # Display the image
         self.im = plt.imshow(img_array, cmap= 'brg')
@@ -46,6 +47,6 @@ class FrameView(object):
         except ValueError as ve:
             print ve
             return
-        
+        self.frameH.update_hist(a)
         self.im.set_data(a)
         self.canvas_map.draw()

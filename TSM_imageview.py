@@ -35,11 +35,11 @@ class TSM_ImageView:
         
         # Create histogram
         frame_hist = Frame(frame_left)
-        self.frameH = FrameHist(frame_hist, a) 
+        frameH = FrameHist(frame_hist, a) 
             
         # Create map frame with widgets
         frame_map=Frame(frame_right)
-        self.frameV = FrameView(frame_map,a)
+        self.frameV = FrameView(frame_map,a, frameH)
         
         # Create scale frame with widgets
         frame_scale = Frame(frame_left)
@@ -92,7 +92,6 @@ class TSM_ImageView:
         if self.file_path != None:
             image_file = np.fromfile(self.file_path, dtype=im_type)
             self.frameV.update_plot(image_file, row, col)
-            self.frameH.update_hist(image_file)
         else:
             print "No image loaded"
         
