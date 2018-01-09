@@ -29,7 +29,6 @@ class MenuBar(object):
     def open_file(self):
         f = file_dialog()
         self.gui.set_image(f)
-        print 'Open file: ', f
 
     def file_list(self):
         print 'Open file list'
@@ -38,7 +37,7 @@ class MenuBar(object):
         print 'Open printing window'
 
     def exit(self):
-        print 'Exit program'
+        self.gui.on_closing()
 
     def about(self):
         print 'About'
