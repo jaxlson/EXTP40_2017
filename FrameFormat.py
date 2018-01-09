@@ -39,9 +39,9 @@ class FrameFormat(object):
         self.order_box.grid(row=2,column=1,sticky='e')
 
         self.row_label.grid(row=3, column=0, sticky='w')
-        self.row_entry.grid(row=3, column=1, sticky='e')
+        self.row_entry.grid(row=3, column=1, sticky='we')
         self.col_label.grid(row=4, column=0, sticky='w')
-        self.col_entry.grid(row=4, column=1, sticky='e')
+        self.col_entry.grid(row=4, column=1, sticky='we')
 
         self.draw_button.grid(row=4, column=2, sticky='e')
         

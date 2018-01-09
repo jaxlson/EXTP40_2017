@@ -3,10 +3,8 @@ Created on 30 nov. 2017
 
 @author: Josefine
 '''
-import numpy as np
 import pylab as plt
 import matplotlib
-from numpy import shape
 
 matplotlib.use('TkAgg')
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
