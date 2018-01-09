@@ -16,7 +16,7 @@ class FrameHist(object):
         self.canvas.get_tk_widget().pack(fill=BOTH, expand=YES)
         
         self.ax = f.gca()
-        self.ax.hist(a,bins='auto')
+        self.ax.hist(self.a,bins='auto')
         self.canvas.show()
     
     def change_scale(self):
@@ -25,6 +25,5 @@ class FrameHist(object):
     def update_hist(self, a):
         self.a = a
         self.ax.clear()
-        self.ax.hist(a,bins='auto')
+        self.ax.hist(self.a,bins='auto')
         self.canvas.draw()
-        return

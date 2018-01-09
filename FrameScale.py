@@ -24,31 +24,11 @@ class FrameScale(object):
         self.min_entry = Entry(frame, textvariable=self.min_var)
         self.max_entry = Entry(frame, textvariable=self.max_var)
         
-        self.min_entry.bind("<Return>", lambda event: min_entry_change(self.min_scale,self.min_var.get()))
-        self.max_entry.bind("<Return>", lambda event: max_entry_change(self.max_scale,self.max_var.get()))
+        self.min_entry.bind("<Return>", lambda event: self.min_entry_change(self.min_scale,self.min_var.get()))
+        self.max_entry.bind("<Return>", lambda event: self.max_entry_change(self.max_scale,self.max_var.get()))
         
-        def min_change(val):
-            val = int(val)
-            temp = self.max_var.get()
-            if(val < temp):
-                self.min_var.set(val)
-                self.view.change_clim(val,temp)
-            else:
-                self.min_var.set(temp-1)
-                self.view.change_clim(temp-1,temp)
-        
-        def max_change(val):
-            val = int(val)
-            temp = self.min_var.get()
-            if(val > temp):
-                self.max_var.set(val)
-                self.view.change_clim(temp,val)
-            else:
-                self.min_var.set(temp+1)
-                self.view.change_clim(temp,temp+1)
-        
-        self.min_scale = Scale(frame, orient=HORIZONTAL, from_=amin, to=amax-1, command=min_change)
-        self.max_scale = Scale(frame, orient=HORIZONTAL, from_=amin+1, to=amax, command=max_change)
+        self.min_scale = Scale(frame, orient=HORIZONTAL, from_=amin, to=amax-1, command= self.min_change)
+        self.max_scale = Scale(frame, orient=HORIZONTAL, from_=amin+1, to=amax, command= self.max_change)
         
         self.min_scale.set(amin)
         self.max_scale.set(amax)
@@ -59,20 +39,42 @@ class FrameScale(object):
         self.max_entry.grid(row=1, column=1)
         self.min_scale.grid(row=0, column=2, sticky='e')
         self.max_scale.grid(row=1, column=2, sticky='e')
-        
-        def min_entry_change(scale, value):
-            if(value < int(self.max_var.get())):
-                scale.configure(from_=value-20, to=value+20)
-                scale.set(value)
+    
+    def min_change(self, val):
+            val = int(val)
+            temp = self.max_var.get()
+            if(val < temp):
+                self.min_var.set(val)
+                self.view.change_clim(val,temp)
             else:
-                scale.configure(from_=value-20, to=value+20)
-                scale.set(int(self.max_var.get())-1)
+                self.min_var.set(temp-1)
+                self.view.change_clim(temp-1,temp)
         
-        def max_entry_change(scale, value):
-            if(value > int(self.min_var.get())):
-                scale.configure(from_=value-20, to=value+20)
-                scale.set(value)
+    def max_change(self,val):
+            val = int(val)
+            temp = self.min_var.get()
+            if(val > temp):
+                self.max_var.set(val)
+                self.view.change_clim(temp,val)
             else:
-                scale.configure(from_=value-20, to=value+20)
-                scale.set(int(self.min_var.get())+1)
-            
+                self.min_var.set(temp+1)
+                self.view.change_clim(temp,temp+1)    
+    
+    def min_entry_change(self,scale, value):
+        if(value < int(self.max_var.get())):
+            scale.configure(from_=value-20, to=value+20)
+            scale.set(value)
+        else:
+            scale.configure(from_=value-20, to=value+20)
+            scale.set(int(self.max_var.get())-1)
+        
+    def max_entry_change(self,  scale, value):
+        if(value > int(self.min_var.get())):
+            scale.configure(from_=value-20, to=value+20)
+            scale.set(value)
+        else:
+            scale.configure(from_=value-20, to=value+20)
+            scale.set(int(self.min_var.get())+1)
+                
+    def update_limit(self):
+        return
