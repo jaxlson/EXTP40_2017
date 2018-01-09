@@ -31,7 +31,7 @@ class TSM_ImageView:
         # Create format frame with widgets
         frame_format = Frame(frame_left)
         # Use self(tsm_imageview) as parameter to call display method
-        frameF = FrameFormat(self, master, frame_format)
+        self.frameF = FrameFormat(self, master, frame_format)
         
         # Create histogram
         frame_hist = Frame(frame_left)
@@ -39,7 +39,7 @@ class TSM_ImageView:
             
         # Create map frame with widgets
         frame_map=Frame(frame_right)
-        self.frameV = FrameView(frame_map,a, frameH, frameF)
+        self.frameV = FrameView(frame_map,a, frameH, self.frameF)
         
         # Create scale frame with widgets
         frame_scale = Frame(frame_left)
@@ -60,6 +60,7 @@ class TSM_ImageView:
     # Set f to the new file path, update in display()
     def set_image(self, f):
         self.file_path = f.encode('utf-8')
+        self.frameF.update_address(self.file_path, "red")
         print self.file_path  
         
     # Displays the loaded image

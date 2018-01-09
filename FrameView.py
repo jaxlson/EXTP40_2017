@@ -49,6 +49,6 @@ class FrameView(object):
             print ve
             return
         self.frameH.update_hist(a)
-        self.frameF.update_address(path)
+        self.frameF.update_address(path, "black")
         self.im.set_data(img_a)
         self.canvas_map.draw()

@@ -57,5 +57,5 @@ class FrameFormat(object):
         except ValueError:
             return False
     
-    def update_address(self, path):
-        self.address_label.config(text=path)
+    def update_address(self, path, col):
+        self.address_label.config(text=path, fg=col)
