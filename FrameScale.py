@@ -27,18 +27,18 @@ class FrameScale(object):
         self.min_entry.bind("<Return>", lambda event: self.min_entry_change(self.min_scale,self.min_var.get()))
         self.max_entry.bind("<Return>", lambda event: self.max_entry_change(self.max_scale,self.max_var.get()))
         
-        self.min_scale = Scale(frame, orient=HORIZONTAL, from_=amin, to=amax-1, command= self.min_change)
-        self.max_scale = Scale(frame, orient=HORIZONTAL, from_=amin+1, to=amax, command= self.max_change)
+        self.min_scale = Scale(frame, orient=HORIZONTAL, from_=amin, to=amax-1, length=150, command= self.min_change)
+        self.max_scale = Scale(frame, orient=HORIZONTAL, from_=amin+1, to=amax, length=150, command= self.max_change)
         
         self.min_scale.set(amin)
         self.max_scale.set(amax)
                
         self.min_label.grid(row=0, column=0, sticky='w')
         self.max_label.grid(row=1, column=0, sticky='w')
-        self.min_entry.grid(row=0, column=1)
-        self.max_entry.grid(row=1, column=1)
-        self.min_scale.grid(row=0, column=2, sticky='e')
-        self.max_scale.grid(row=1, column=2, sticky='e')
+        self.min_entry.grid(row=0, column=1, ipady=2)
+        self.max_entry.grid(row=1, column=1, ipady=2)
+        self.min_scale.grid(row=0, column=2, sticky='e', padx=10)
+        self.max_scale.grid(row=1, column=2, sticky='e', padx=10)
     
     def min_change(self, val):
             val = int(val)

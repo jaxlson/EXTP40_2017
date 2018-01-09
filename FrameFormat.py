@@ -37,16 +37,16 @@ class FrameFormat(object):
         self.main_label.grid(row=0, column=0, sticky='w')
         self.address_label.grid(row=1, column=0)
         self.type_label.grid(row=2, column=0, sticky='w')
-        self.type_box.grid(row=2,column=1,sticky='e')
+        self.type_box.grid(row=2,column=0)
         self.order_label.grid(row=3, column=0, sticky='w')
-        self.order_box.grid(row=3,column=1,sticky='e')
+        self.order_box.grid(row=3,column=0)
 
         self.row_label.grid(row=4, column=0, sticky='w')
-        self.row_entry.grid(row=4, column=1, sticky='we')
+        self.row_entry.grid(row=4, column=0)
         self.col_label.grid(row=5, column=0, sticky='w')
-        self.col_entry.grid(row=5, column=1, sticky='we')
+        self.col_entry.grid(row=5, column=0)
 
-        self.draw_button.grid(row=5, column=2, sticky='e')
+        self.draw_button.grid(row=5, column=2, sticky='w')
         
     #Only numbers in the entries
     def nbr_check(self, new_text):
