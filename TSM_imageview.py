@@ -3,13 +3,13 @@ import matplotlib
 
 matplotlib.use('TkAgg')
 import numpy as np
-import pylab as plt
+import matplotlib.pyplot as plt
 from MenuBar import MenuBar
 from FrameFormat import FrameFormat
 from FrameScale import FrameScale
 from FrameView import FrameView
 from FrameHist import FrameHist
-from ComboBox import ComboBox
+from CmapBox import CmapBox
 
 class TSM_ImageView:
     # Divide in to MVC model, or just separate classes 
@@ -46,7 +46,7 @@ class TSM_ImageView:
         self.frameS = FrameScale(a, frame_scale, self.frameV)
         
         # Create combobox for colormap selection
-        ComboBox(frame_right, self.frameV)
+        CmapBox(frame_right, self.frameV)
         
         # Layout - widget positioning
         frame_left.pack(side=LEFT, fill=Y, padx=5, pady=5)

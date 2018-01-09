@@ -6,7 +6,7 @@ Created on 30 nov. 2017
 from Tkinter import StringVar
 import ttk
 
-class ComboBox(object):
+class CmapBox(object):
 
     def __init__(self, frame, map_):
         self.map = map_
