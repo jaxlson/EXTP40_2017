@@ -31,7 +31,7 @@ class TSM_ImageView:
         # Create format frame with widgets
         frame_format = Frame(frame_left)
         # Use self(tsm_imageview) as parameter to call display method
-        FrameFormat(self, master, frame_format)
+        frameF = FrameFormat(self, master, frame_format)
         
         # Create histogram
         frame_hist = Frame(frame_left)
@@ -39,7 +39,7 @@ class TSM_ImageView:
             
         # Create map frame with widgets
         frame_map=Frame(frame_right)
-        self.frameV = FrameView(frame_map,a, frameH)
+        self.frameV = FrameView(frame_map,a, frameH, frameF)
         
         # Create scale frame with widgets
         frame_scale = Frame(frame_left)
@@ -59,7 +59,8 @@ class TSM_ImageView:
     
     # Set f to the new file path, update in display()
     def set_image(self, f):
-        self.file_path = f.encode('utf-8')  
+        self.file_path = f.encode('utf-8')
+        print self.file_path  
         
     # Displays the loaded image
     # Parameters from FrameFormat: image file type, byte order, Nbr of rows, Nbr of col
@@ -91,7 +92,7 @@ class TSM_ImageView:
             return
         if self.file_path != None:
             image_file = np.fromfile(self.file_path, dtype=im_type)
-            self.frameV.update_plot(image_file, row, col)
+            self.frameV.update_plot(image_file, row, col, self.file_path)
         else:
             print "No image loaded"
         

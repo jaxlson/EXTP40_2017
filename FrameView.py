@@ -12,11 +12,12 @@ from Tkinter import BOTH, TRUE
 
 class FrameView(object):
     
-    def __init__(self, frame, img_array, frameV):
+    def __init__(self, frame, img_array, frameH, frameF):
         # Reshape to the right rows and cols
         # Values from frameformat
         img_array = img_array.reshape(200,200)
-        self.frameV = frameV
+        self.frameH = frameH
+        self.frameF = frameF
 
         # Display the image
         self.im = plt.imshow(img_array, cmap= 'brg')
@@ -37,10 +38,10 @@ class FrameView(object):
         self.im.set_clim(vmin,vmax)
         self.canvas_map.draw()
     
-    def update_plot(self, a, row, col):
+    def update_plot(self, a, row, col, path):
         # TO-DO display error in gui
         try:
-            a = a.reshape((row,col))
+            img_a = a.reshape((row,col))
         except TypeError as te:
             print te
             return
@@ -48,5 +49,6 @@ class FrameView(object):
             print ve
             return
         self.frameH.update_hist(a)
-        self.im.set_data(a)
+        self.frameF.update_address(path)
+        self.im.set_data(img_a)
         self.canvas_map.draw()

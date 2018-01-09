@@ -10,6 +10,7 @@ class FrameFormat(object):
 
     def __init__(self,gui, master, frame):
         self.main_label = Label(frame, text = "TIMESAT image viewer")
+        self.address_label = Label(frame, text = "D:/-LTH-/-HT 17-/GIT-projekt i Python/Projekt/EXTP40_2017/EXTP40_2017/wa_cl00011.img")
         self.type_label = Label(frame, text = "Image file type")
         type_box_value = StringVar()
         self.type_box = ttk.Combobox(frame, textvariable=type_box_value, state='readonly')
@@ -33,6 +34,7 @@ class FrameFormat(object):
         self.draw_button = Button(frame, text="Draw", command=lambda: gui.display(self.type_box.get(), self.order_box.get(), self.row_entry.get(),self.col_entry.get()))
         
         self.main_label.grid(row=0, column=0, sticky='w')
+        self.address_label.grid(row=0, column=1)
         self.type_label.grid(row=1, column=0, sticky='w')
         self.type_box.grid(row=1,column=1,sticky='e')
         self.order_label.grid(row=2, column=0, sticky='w')
@@ -54,3 +56,6 @@ class FrameFormat(object):
             return True
         except ValueError:
             return False
+    
+    def update_address(self, path):
+        self.address_label.config(text=path)
