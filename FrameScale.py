@@ -76,5 +76,9 @@ class FrameScale(object):
             scale.configure(from_=value-20, to=value+20)
             scale.set(int(self.min_var.get())+1)
                 
-    def update_limit(self):
-        return
+    def update_limit(self, a):
+        self.min_change(np.amin(a))
+        self.max_change(np.amax(a))
+        self.min_entry_change(self.min_scale, np.amin(a))
+        self.max_entry_change(self.max_scale, np.amax(a))
+        

@@ -17,7 +17,7 @@ class TSM_ImageView:
  
         master.title("TSM Image View")
 
-        # Create frames for right and left "columns"
+        # Create frames for right and left "columns" of the window
         frame_left = Frame(master)
         frame_right = Frame(master)
         
@@ -35,11 +35,11 @@ class TSM_ImageView:
         
         # Create histogram
         frame_hist = Frame(frame_left)
-        frameH = FrameHist(frame_hist, a) 
+        self.frameH = FrameHist(frame_hist, a) 
             
         # Create map frame with widgets
         frame_map=Frame(frame_right)
-        self.frameV = FrameView(frame_map,a, frameH, self.frameF)
+        self.frameV = FrameView(frame_map,a)
         
         # Create scale frame with widgets
         frame_scale = Frame(frame_left)
@@ -63,8 +63,7 @@ class TSM_ImageView:
         self.frameF.update_address(self.file_path, "red")
         print self.file_path  
         
-    # Displays the loaded image
-    # Parameters from FrameFormat: image file type, byte order, Nbr of rows, Nbr of col
+    # Displays the loaded image - called in FrameFormat
     # TO-DO Error messages displayed in the gui
     
     def display(self, im_type, order, row, col):
@@ -93,7 +92,17 @@ class TSM_ImageView:
             return
         if self.file_path != None:
             image_file = np.fromfile(self.file_path, dtype=im_type)
-            self.frameV.update_plot(image_file, row, col, self.file_path)
+            try:
+                self.frameV.update_plot(image_file, row, col)
+            except TypeError as te:
+                print "in tsm" , te
+                return
+            except ValueError as ve:
+                print "in tsm", ve
+                return
+            self.frameH.update_hist(image_file)
+            self.frameS.update_limit(image_file)
+            self.frameF.update_address(self.file_path, "black")
         else:
             print "No image loaded"
         
