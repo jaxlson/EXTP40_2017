@@ -1,17 +1,25 @@
-# EXTP40_2017
-Python implementation of TIMESAT GUI
+# Course EXTP40_2017
+## Project: Python implementation of TIMESAT imageview GUI.
+TIMESAT is a program to display time series of satellite images.
 
-Upplägget av funktioner som programmet har i matlab tycker vi har en bra struktur och har inte några större ändringar. Om det finns möjlighet vill vi flytta zoom och panorering så att de är i anslutning till kartan.
+### Functionalities
 
-Menyer:
-* File: under denna meny ska möjligheten att öpna en binär bildfil finnas, och eventuellt från en fillista.
-* Help: hjälp om programmet och användning
-GUI:
-Programmet ska visa vald bildfil med möjlighet att ändra färgschema det ska finnas  
-Zoomning och panorering av bilder 
-Det ska finnas möjlighet att visning av statistik, t.ex. min, max, histogram och möjlighet att ändra färgskalningen genom att ändra min och max.
-Man ska kunna få reda på en enskild pixels värde genom att klicka i bilden. Informationen kommer upp i en ruta i anslutning till den pixeln. 
-Hjälptexter när man för pekaren över olika funktioner 
+* Choose and read binary image files, possibly from a list of files.
+* Displaying the image with different colour schemes.
+* Ability to zoom and pan the image.
+* Showing statistics, such as min, max and a histogram
+* Ability to modify colouring and histogram by changing min and max.
+* Display the pixel value when pointing at a pixel.
+* Help texts when hovering the mouse over different functions.
 
-
-<img src="https://github.com/jaxlson/EXTP40_2017/blob/master/timesat2.png" width="400">
+### Further improvments
+* Open a list of selected files, to easily change which file to open.
+* Update the histogram when the scale (min and max values) is changed.
+* Print error messages in a way visible to the user.
+* Add help text when hovering over buttons.
+* Add functionality to File > Printing window in the menu bar.
+* Add functionality to Help > About in the menu bar.
+* Add “Lock axes” as in the original programme.
+* Able the user to turn on/off a grid in the image, as in the original programme.
+(matplotlib.pylot.grid)
+* Reconsider the process of opening a new image.

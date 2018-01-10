@@ -4,6 +4,7 @@ import matplotlib
 matplotlib.use('TkAgg')
 import numpy as np
 import matplotlib.pyplot as plt
+
 from MenuBar import MenuBar
 from FrameFormat import FrameFormat
 from FrameScale import FrameScale
