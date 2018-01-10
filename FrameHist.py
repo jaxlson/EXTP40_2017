@@ -2,6 +2,8 @@
 Created on 30 nov. 2017
 
 @author: Josefine
+
+Class to control the histogram.
 '''
 from Tkinter import BOTH,YES
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg

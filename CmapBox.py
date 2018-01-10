@@ -2,6 +2,8 @@
 Created on 30 nov. 2017
 
 @author: Josefine
+
+Drop down menu for colour selection.
 '''
 from Tkinter import StringVar
 import ttk

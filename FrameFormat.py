@@ -48,7 +48,7 @@ class FrameFormat(object):
 
         self.draw_button.grid(row=5, column=2, sticky='w')
         
-    #Only numbers in the entries
+    #Only numbers in the entries. Might want to use this in min/max entry in FrameScale
     def nbr_check(self, new_text):
         if not new_text:        # the field is being cleared
             return True         # return that the entry is empty
@@ -57,6 +57,6 @@ class FrameFormat(object):
             return True
         except ValueError:
             return False
-    
+
     def update_address(self, path, col):
         self.address_label.config(text=path, fg=col)

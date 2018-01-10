@@ -30,14 +30,17 @@ class MenuBar(object):
         f = tkFileDialog.askopenfilename()       
         self.gui.set_image(f)
 
+    #TODO: Add proper functionality
     def file_list(self):
         print 'Open file list'
 
+    #TODO: Add proper functionality
     def printing_window(self):
         print 'Open printing window'
 
     def exit(self):
         self.gui.on_closing()
 
+    #TODO: Add proper functionality
     def about(self):
         print 'About'

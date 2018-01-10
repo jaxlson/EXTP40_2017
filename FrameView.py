@@ -13,9 +13,7 @@ from Tkinter import BOTH, TRUE
 class FrameView(object):
     
     def __init__(self, frame, img_array):
-        # Reshape to the right rows and cols
-        # Values from frameformat
-        img_array = img_array.reshape(200,200)
+        img_array = img_array.reshape(200,200) #The rows and cols of the default image
 
         # Display the image
         self.im = plt.imshow(img_array, cmap= 'brg')
@@ -37,7 +35,7 @@ class FrameView(object):
         self.canvas_map.draw()
     
     def update_plot(self, a, row, col):
-        # TO-DO display error in gui
+        # TODO: display error in gui
         img_a = a.reshape((row,col))
         self.im.set_data(img_a)
         self.canvas_map.draw()

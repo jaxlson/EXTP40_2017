@@ -2,13 +2,15 @@
 Created on 28 nov. 2017
 
 @author: Josefine
+
+Class to control the min and max scale bars and entries.
 '''
 from Tkinter import Label, Entry, Scale, HORIZONTAL, IntVar
 import numpy as np
 
 class FrameScale(object):
-    # TO-DO Bugs: When the scale bar is dragged to overlap the other the values does not update correctly
-    # TO-DO The histogram should be updated when scale is changed
+    # TODO Bugs: When the scale bar is dragged to overlap the other the values does not update correctly
+    # TODO The histogram should be updated when scale is changed
     def __init__(self, a, frame, view):
         self.view = view
         amin = np.amin(a)
@@ -40,6 +42,7 @@ class FrameScale(object):
         self.min_scale.grid(row=0, column=2, sticky='e', padx=10)
         self.max_scale.grid(row=1, column=2, sticky='e', padx=10)
     
+    #Scale bar
     def min_change(self, val):
             val = int(val)
             temp = self.max_var.get()
@@ -50,6 +53,7 @@ class FrameScale(object):
                 self.min_var.set(temp-1)
                 self.view.change_clim(temp-1,temp)
         
+    #Scale bar
     def max_change(self,val):
             val = int(val)
             temp = self.min_var.get()
@@ -59,7 +63,9 @@ class FrameScale(object):
             else:
                 self.min_var.set(temp+1)
                 self.view.change_clim(temp,temp+1)    
-    
+
+    #Entry
+    #TODO: only allow numbers as input. Use nbr_check from FrameFormat.
     def min_entry_change(self,scale, value):
         if(value < int(self.max_var.get())):
             scale.configure(from_=value-20, to=value+20)
@@ -67,7 +73,9 @@ class FrameScale(object):
         else:
             scale.configure(from_=value-20, to=value+20)
             scale.set(int(self.max_var.get())-1)
-        
+
+    #Entry
+    #TODO: only allow numbers as input. Use nbr_check from FrameFormat.
     def max_entry_change(self,  scale, value):
         if(value > int(self.min_var.get())):
             scale.configure(from_=value-20, to=value+20)
