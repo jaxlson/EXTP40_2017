@@ -2,6 +2,8 @@
 ## Project: Python implementation of TIMESAT imageview GUI.
 TIMESAT is a program to display time series of satellite images.
 
+To run the program run *TSM_imageview.py*
+
 ### Functionalities
 
 * Choose and read binary image files, possibly from a list of files.
